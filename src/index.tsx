@@ -6,6 +6,7 @@ import { reportWebVitals } from './reportWebVitals';
 import { ContextStore, createStore } from './store';
 
 const store = createStore();
+window.DEBUG_STORE = store;
 
 ReactDOM.render(
   <ContextStore.Provider value={store}>

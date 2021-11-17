@@ -1,12 +1,13 @@
-import { makeObservable, observable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 
-export type PageNameType = 'mainMenu';
+export type PageNameType = 'mainMenu' | 'difficultyChoice';
 
 export class PageStore {
   activePageName: PageNameType = 'mainMenu';
   constructor() {
     makeObservable(this, {
       activePageName: observable,
+      changePage: action,
     });
   }
 

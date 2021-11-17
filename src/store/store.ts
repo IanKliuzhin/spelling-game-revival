@@ -1,11 +1,14 @@
 import { createContext, useContext } from 'react';
+import { GameStore } from './gameStore/gameStore';
 import { PageStore } from './pageStore';
 
 export class RootStore {
   pageStore: PageStore;
+  gameStore: GameStore;
 
   constructor() {
     this.pageStore = new PageStore();
+    this.gameStore = new GameStore();
   }
 }
 
