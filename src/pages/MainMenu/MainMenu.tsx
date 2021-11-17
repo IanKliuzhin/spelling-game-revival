@@ -1,3 +1,4 @@
+import { Button } from 'src/components';
 import { useStore } from 'src/store';
 import { PlayerType } from 'src/store/gameStore';
 import './style.scss';
@@ -18,12 +19,11 @@ export const MainMenu = () => {
   return (
     <div className="mainPage">
       <div className="wrapperButton">
-        <div className="button" onClick={handleCreateGameClick}>
-          Создать битву
-        </div>
-        <div className="button" onClick={handleConnectClick}>
-          Присоединиться к битве
-        </div>
+        <Button handleClick={handleCreateGameClick} text="Создать битву" />
+        <Button
+          handleClick={handleConnectClick}
+          text="Присоединиться к битве"
+        />
       </div>
     </div>
   );

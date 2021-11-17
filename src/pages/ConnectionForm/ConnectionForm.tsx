@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
+import { Button, MainMenuButton } from 'src/components';
 import { useStore } from 'src/store';
 import './style.scss';
 
@@ -32,11 +33,13 @@ export const ConnectionForm = observer(() => {
       ) : (
         <div className="formWrapper">
           <input value={gameId} onChange={(ev) => setGameId(ev.target.value)} />
-          <div className="button" onClick={() => handleConnectClick()}>
-            Подключиться
-          </div>
+          <Button
+            handleClick={() => handleConnectClick()}
+            text="Подключиться"
+          />
         </div>
       )}
+      <MainMenuButton />
     </div>
   );
 });

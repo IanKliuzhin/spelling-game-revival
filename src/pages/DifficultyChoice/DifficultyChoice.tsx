@@ -1,3 +1,4 @@
+import { Button, MainMenuButton } from 'src/components';
 import { useStore } from 'src/store';
 import { DifficultyType } from 'src/store/gameStore';
 import './style.scss';
@@ -14,15 +15,14 @@ export const DifficultyChoice = () => {
     <div className="difficultyPage">
       <div className="wrapperButton">
         {Object.values(DifficultyType).map((difficulty) => (
-          <div
-            className="button"
+          <Button
             key={difficulty}
-            onClick={() => handleDifficultyChoice(difficulty)}
-          >
-            {difficulty}
-          </div>
+            handleClick={() => handleDifficultyChoice(difficulty)}
+            text={difficulty}
+          />
         ))}
       </div>
+      <MainMenuButton />
     </div>
   );
 };
