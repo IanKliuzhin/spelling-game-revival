@@ -4,6 +4,8 @@ import { useStore } from 'src/store';
 import './style.scss';
 
 export const Battle = observer(() => {
+  // mistake - ошибка буквы
+  // correctAnswer - стили состояние правильного ответа
   return (
     <div className="pageBattle">
       <div className="headerWrapper">
@@ -44,11 +46,12 @@ export const Battle = observer(() => {
         </div>
       </div>
       <div className="exerciseContainer">
-        <div className="exercise">
+        <div className="exercise correctAnswer">
           <div className="imageExercise"></div>
           <div className="inputExercise">
             <div className="letterExercise">г</div>
             <div className="letterExercise">е</div>
+            <div className="letterExercise mistake">р</div>
           </div>
         </div>
       </div>
