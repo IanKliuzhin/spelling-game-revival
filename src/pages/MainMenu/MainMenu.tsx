@@ -2,7 +2,7 @@ import React from 'react';
 
 import './style.scss';
 
-export const MainPage = () => {
+export const MainMenu = () => {
   return (
     <div className="globalWrapper">
       <div className="mainPage">

@@ -1,13 +1,15 @@
 import { createContext, useContext } from 'react';
-
-type CreateStoreProps = any;
+import { PageStore } from './pageStore';
 
 export class RootStore {
-  // constructor({}: CreateStoreProps) {
-  // }
+  pageStore: PageStore;
+
+  constructor() {
+    this.pageStore = new PageStore();
+  }
 }
 
-export const createStore = (props: CreateStoreProps): RootStore => {
+export const createStore = (): RootStore => {
   return new RootStore();
 };
 
