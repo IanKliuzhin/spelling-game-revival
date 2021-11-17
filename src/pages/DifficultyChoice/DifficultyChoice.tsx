@@ -1,5 +1,5 @@
 import { useStore } from 'src/store';
-import { DifficultyType } from 'src/store/gameStore/gameStore';
+import { DifficultyType } from 'src/store/gameStore';
 import './style.scss';
 
 export const DifficultyChoice = () => {

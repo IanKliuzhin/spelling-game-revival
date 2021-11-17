@@ -14,11 +14,13 @@ export enum PlayerType {
 export class GameStore {
   difficulty = DifficultyType.EASY;
   playerType = PlayerType.HOST;
+  gameId = '';
 
   constructor() {
     makeObservable(this, {
       difficulty: observable,
       playerType: observable,
+      gameId: observable,
       setDifficulty: action,
       setPlayerType: action,
     });
@@ -30,5 +32,9 @@ export class GameStore {
 
   setPlayerType = (playerType: PlayerType) => {
     this.playerType = playerType;
+  };
+
+  setGameId = (gameId: string) => {
+    this.gameId = gameId;
   };
 }
