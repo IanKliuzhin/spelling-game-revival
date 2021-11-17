@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
+import { MainMenuButton } from 'src/components';
 import { useStore } from 'src/store';
 import './style.scss';
 
@@ -37,6 +38,7 @@ export const ConnectionForm = observer(() => {
           </div>
         </div>
       )}
+      <MainMenuButton />
     </div>
   );
 });

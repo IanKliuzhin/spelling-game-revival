@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'src/store';
 import './style.scss';
+import { MainMenuButton } from 'src/components';
 
 export const BattleInfo = observer(() => {
   const { gameStore } = useStore();
@@ -25,6 +26,7 @@ export const BattleInfo = observer(() => {
       ) : (
         'Ожидание соперника...'
       )}
+      <MainMenuButton />
     </div>
   );
 });
