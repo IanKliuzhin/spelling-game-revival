@@ -7,7 +7,7 @@ export const DifficultyChoice = () => {
 
   const handleDifficultyChoice = (difficulty: DifficultyType) => {
     gameStore.setDifficulty(difficulty);
-    pageStore.changePage('mainMenu'); // TODO поменять на нужный экран, когда он будет создан
+    pageStore.changePage('battleInfo');
   };
 
   return (

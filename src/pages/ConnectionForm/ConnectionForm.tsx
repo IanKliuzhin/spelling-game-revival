@@ -1,18 +1,29 @@
-import { useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import { useEffect, useState } from 'react';
 import { useStore } from 'src/store';
 import './style.scss';
 
-export const ConnectionForm = () => {
+export const ConnectionForm = observer(() => {
   const [gameId, setGameId] = useState('');
   const [isConnecting, setIsConnecting] = useState(false);
 
-  const { gameStore } = useStore();
+  const { gameStore, pageStore } = useStore();
+  const { isConnected } = gameStore;
 
   const handleConnectClick = () => {
     setIsConnecting(true);
     gameStore.setGameId(gameId);
-    // TODO логика подключения
+    // TODO заменить на реальную логику подключения
+    window.setTimeout(() => {
+      gameStore.setIsConnected(true);
+    }, 500);
   };
+
+  useEffect(() => {
+    if (isConnected) {
+      pageStore.changePage('battleInfo');
+    }
+  }, [isConnected]);
 
   return (
     <div className="connectionForm">
@@ -28,4 +39,4 @@ export const ConnectionForm = () => {
       )}
     </div>
   );
-};
+});
