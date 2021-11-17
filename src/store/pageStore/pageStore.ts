@@ -1,6 +1,6 @@
 import { action, makeObservable, observable } from 'mobx';
 
-export type PageNameType = 'mainMenu' | 'difficultyChoice';
+export type PageNameType = 'mainMenu' | 'difficultyChoice' | 'connectionForm';
 
 export class PageStore {
   activePageName: PageNameType = 'mainMenu';

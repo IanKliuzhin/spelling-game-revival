@@ -1,10 +1,12 @@
 import { observer } from 'mobx-react-lite';
-import { MainMenu, DifficultyChoice } from 'src/pages';
+import { MainMenu, DifficultyChoice, ConnectionForm } from 'src/pages';
 import { useStore } from 'src/store';
+import { PageNameType } from 'src/store/pageStore';
 
-const pages = {
+const pages: Record<PageNameType, () => JSX.Element> = {
   mainMenu: MainMenu,
   difficultyChoice: DifficultyChoice,
+  connectionForm: ConnectionForm,
 };
 
 export const PageManager = observer(() => {
