@@ -1,8 +1,7 @@
-import logo from './logo.svg';
-import './App.scss';
-
 import { MainPage } from './pages';
 import { GlobalWrapper } from './components';
+import logo from './logo.svg';
+import './App.scss';
 
 function App() {
   return (
@@ -30,4 +29,4 @@ function App() {
   );
 }
 
-export default App;
+export { App };
