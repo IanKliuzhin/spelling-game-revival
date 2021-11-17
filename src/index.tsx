@@ -5,7 +5,7 @@ import { App } from './App';
 import { reportWebVitals } from './reportWebVitals';
 import { ContextStore, createStore } from './store';
 
-const store = createStore({});
+const store = createStore();
 
 ReactDOM.render(
   <ContextStore.Provider value={store}>
