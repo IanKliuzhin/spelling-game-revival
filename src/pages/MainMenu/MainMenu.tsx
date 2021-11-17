@@ -1,15 +1,19 @@
-import React from 'react';
-
+import { useStore } from 'src/store';
 import './style.scss';
 
 export const MainMenu = () => {
+  const { pageStore } = useStore();
+
   return (
-    <div className="globalWrapper">
-      <div className="mainPage">
-        <div className="wrapperButton">
-          <div className="button">Создать битву</div>
-          <div className="button">Присоедениться к битве</div>
+    <div className="mainPage">
+      <div className="wrapperButton">
+        <div
+          className="button"
+          onClick={() => pageStore.changePage('difficultyChoice')}
+        >
+          Создать битву
         </div>
+        <div className="button">Присоединиться к битве</div>
       </div>
     </div>
   );
