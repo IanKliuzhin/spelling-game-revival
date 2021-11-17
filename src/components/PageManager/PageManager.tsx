@@ -1,5 +1,10 @@
 import { observer } from 'mobx-react-lite';
-import { MainMenu, DifficultyChoice, ConnectionForm } from 'src/pages';
+import {
+  MainMenu,
+  DifficultyChoice,
+  ConnectionForm,
+  BattleInfo,
+} from 'src/pages';
 import { useStore } from 'src/store';
 import { PageNameType } from 'src/store/pageStore';
 
@@ -7,6 +12,7 @@ const pages: Record<PageNameType, () => JSX.Element> = {
   mainMenu: MainMenu,
   difficultyChoice: DifficultyChoice,
   connectionForm: ConnectionForm,
+  battleInfo: BattleInfo,
 };
 
 export const PageManager = observer(() => {

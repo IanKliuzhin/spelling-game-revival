@@ -15,14 +15,17 @@ export class GameStore {
   difficulty = DifficultyType.EASY;
   playerType = PlayerType.HOST;
   gameId = '';
+  isConnected = false;
 
   constructor() {
     makeObservable(this, {
       difficulty: observable,
       playerType: observable,
       gameId: observable,
+      isConnected: observable,
       setDifficulty: action,
       setPlayerType: action,
+      setIsConnected: action,
     });
   }
 
@@ -36,5 +39,9 @@ export class GameStore {
 
   setGameId = (gameId: string) => {
     this.gameId = gameId;
+  };
+
+  setIsConnected = (isConnected: boolean) => {
+    this.isConnected = isConnected;
   };
 }

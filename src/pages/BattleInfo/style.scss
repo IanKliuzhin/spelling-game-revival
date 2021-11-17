@@ -1,0 +1,34 @@
+.battleInfo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 25px;
+
+  .fighter {
+    width: 544px;
+    height: 343px;
+    border-radius: 32px;
+
+    &.hero {
+      background-color: #4F95FF;
+      justify-self: flex-start;
+    }
+
+    &.rival {
+      background-color: #B376FF;
+    }
+  }
+
+  .versus {
+    color: #535E7E;
+    font-family: IBM Plex Sans;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 64px;
+    text-align: center;
+    letter-spacing: 0.04em;
+  }
+}
