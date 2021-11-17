@@ -8,7 +8,7 @@ export class RootStore {
 
   constructor() {
     this.pageStore = new PageStore();
-    this.gameStore = new GameStore();
+    this.gameStore = new GameStore({ rootStore: this });
   }
 }
 

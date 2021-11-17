@@ -1,4 +1,5 @@
 import { action, makeObservable, observable } from 'mobx';
+import { RootStore } from '..';
 
 export enum DifficultyType {
   EASY = 'easy',
@@ -16,8 +17,9 @@ export class GameStore {
   playerType = PlayerType.HOST;
   gameId = '';
   isConnected = false;
+  rootStore: RootStore;
 
-  constructor() {
+  constructor({ rootStore }: { rootStore: RootStore }) {
     makeObservable(this, {
       difficulty: observable,
       playerType: observable,
@@ -26,7 +28,10 @@ export class GameStore {
       setDifficulty: action,
       setPlayerType: action,
       setIsConnected: action,
+      resetGame: action,
     });
+
+    this.rootStore = rootStore;
   }
 
   setDifficulty = (difficulty: DifficultyType) => {
@@ -43,5 +48,11 @@ export class GameStore {
 
   setIsConnected = (isConnected: boolean) => {
     this.isConnected = isConnected;
+  };
+
+  resetGame = () => {
+    this.rootStore.pageStore.changePage('mainMenu');
+    this.isConnected = false;
+    this.gameId = '';
   };
 }
