@@ -11,7 +11,7 @@ export const Button = ({
   text,
 }: {
   handleClick?: () => void;
-  type: ButtonType;
+  type?: ButtonType;
   text: string;
 }) => {
   return (
