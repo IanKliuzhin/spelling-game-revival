@@ -4,6 +4,7 @@ import {
   DifficultyChoice,
   ConnectionForm,
   BattleInfo,
+  Battle,
 } from 'src/pages';
 import { useStore } from 'src/store';
 import { PageNameType } from 'src/store/pageStore';
@@ -13,6 +14,7 @@ const pages: Record<PageNameType, () => JSX.Element> = {
   difficultyChoice: DifficultyChoice,
   connectionForm: ConnectionForm,
   battleInfo: BattleInfo,
+  battle: Battle,
 };
 
 export const PageManager = observer(() => {

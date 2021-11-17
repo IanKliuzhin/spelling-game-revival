@@ -4,10 +4,11 @@ export type PageNameType =
   | 'mainMenu'
   | 'difficultyChoice'
   | 'connectionForm'
-  | 'battleInfo';
+  | 'battleInfo'
+  | 'battle';
 
 export class PageStore {
-  activePageName: PageNameType = 'mainMenu';
+  activePageName: PageNameType = 'battle';
   constructor() {
     makeObservable(this, {
       activePageName: observable,
