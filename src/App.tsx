@@ -1,12 +1,11 @@
-import { MainPage } from './pages';
-import { GlobalWrapper } from './components';
+import { GlobalWrapper, PageManager } from './components';
 import './App.scss';
 
 function App() {
   return (
     <div className="App">
       <GlobalWrapper>
-        <MainPage />
+        <PageManager />
       </GlobalWrapper>
     </div>
   );
