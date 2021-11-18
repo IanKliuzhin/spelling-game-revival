@@ -11,7 +11,7 @@ import {
 import { nanoid } from 'nanoid';
 import { firebaseConfig } from './firebaseConfig';
 import { RootStore } from '..';
-import { ConnectionStoreType } from './types';
+import { ConnectionStoreType, Message, MessageType } from './types';
 
 const CONNECTION_CONFIG = {
   iceServers: [{ urls: 'stun:stun2.1.google.com:19302' }],
@@ -130,6 +130,7 @@ export class ConnectionStore implements ConnectionStoreType {
     this.channel.onmessage = (ev) => {
       const data = JSON.parse(ev.data);
       console.log('got data by channel', data);
+      this.handleMessage(data);
     };
     this.channel.onclose = () => {
       this.rootStore.gameStore.resetGame();
@@ -149,5 +150,33 @@ export class ConnectionStore implements ConnectionStoreType {
     this.connection = null;
     this.connectionId = null;
     this.isConnected = false;
+  };
+
+  handleMessage = (message: Message) => {
+    switch (message.type) {
+      case MessageType.START_GAME:
+        this.rootStore.gameStore.startGame();
+        break;
+      case MessageType.START_BATTLE:
+        this.rootStore.gameStore.startBattle(message.task);
+        break;
+      case MessageType.FINISH_TASK:
+        this.rootStore.gameStore.saveRivalResult({
+          secondsLeft: message.secondsLeft,
+          lifesLeft: message.lifesLeft,
+        });
+        break;
+      case MessageType.END_BATTLE:
+        this.rootStore.gameStore.endBattle();
+        break;
+      case MessageType.END_GAME:
+        this.rootStore.gameStore.endGame();
+        break;
+      case MessageType.REQUEST_RESTART:
+        this.rootStore.gameStore.saveRestartRequest();
+        break;
+      default:
+        break;
+    }
   };
 }
