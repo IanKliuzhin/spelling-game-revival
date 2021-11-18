@@ -98,7 +98,18 @@ export class BattleStore {
     return mistake;
   };
 
+  startBattle = (exercise: ExerciseDataType) => {
+    // TODO сохранение текущего задания, сброс жизней на 3, сброс таймера на 10
+    console.log('exercise', exercise);
+  };
+
   endBattle = () => {
     this.isCorrectAnswer = true;
+    // TODO отправка в гейм стор результата
+    // const result: BattleResultType = {
+    //   secondsLeft: 2,
+    //   lifesLeft: 2,
+    // };
+    // this.rootStore.gameStore.saveBattleResult(result);
   };
 }

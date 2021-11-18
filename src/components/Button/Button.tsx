@@ -3,6 +3,7 @@ import './style.scss';
 
 export enum ButtonType {
   MAIN_MENU = 'mainMenu',
+  START_GAME = 'startGame',
 }
 
 export const Button = ({

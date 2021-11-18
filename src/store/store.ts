@@ -1,13 +1,13 @@
 import { createContext, useContext } from 'react';
-import { ConnectionStore } from './connectionStore/connectionStore';
 import { GameStore } from './gameStore/gameStore';
 import { PageStore } from './pageStore';
 import { BattleStore } from './battleStore';
+import { ConnectionStore, ConnectionStoreType } from './connectionStore';
 
 export class RootStore {
   pageStore: PageStore;
   gameStore: GameStore;
-  connectionStore: ConnectionStore;
+  connectionStore: ConnectionStoreType;
   battleStore: BattleStore;
 
   constructor() {

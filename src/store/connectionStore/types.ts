@@ -1,6 +1,6 @@
 import { Database } from '@firebase/database';
 import { RootStore } from '..';
-import { TaskType } from '../gameStore';
+import { ExerciseDataType } from '../battleStore';
 
 export type ConnectionStoreType = {
   db: Database;
@@ -13,7 +13,7 @@ export type ConnectionStoreType = {
   startHostSession: () => Promise<void>;
   startClientSession: (connectionId: string) => Promise<void>;
   setChannel: (channel: RTCDataChannel) => void;
-  sendMessage: (message: MessageType) => void;
+  sendMessage: (message: Message) => void;
   closeConnection: () => void;
   handleMessage: (message: Message) => void;
 };
@@ -21,8 +21,7 @@ export type ConnectionStoreType = {
 export enum MessageType {
   START_GAME = 'start-game',
   START_BATTLE = 'start-battle',
-  FINISH_TASK = 'finish-task',
-  END_BATTLE = 'end-battle',
+  FINISH_EXERCISE = 'finish-exercise',
   END_GAME = 'end-game',
   REQUEST_RESTART = 'request-restart',
 }
@@ -33,15 +32,12 @@ export type Message =
     }
   | {
       type: MessageType.START_BATTLE;
-      task: TaskType;
+      exercise: ExerciseDataType;
     }
   | {
-      type: MessageType.FINISH_TASK;
+      type: MessageType.FINISH_EXERCISE;
       secondsLeft: number;
       lifesLeft: number;
-    }
-  | {
-      type: MessageType.END_BATTLE;
     }
   | {
       type: MessageType.END_GAME;

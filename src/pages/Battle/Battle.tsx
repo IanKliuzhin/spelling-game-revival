@@ -1,19 +1,28 @@
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
 import { useStore } from 'src/store';
-import { LifeList, WordAnswer } from '../../components';
+import { PlayerType } from 'src/store/gameStore';
+import { LifeList, StartButton, WordAnswer } from 'src/components';
 import ReactHowler from 'react-howler';
 import cn from 'classnames';
 import './style.scss';
 
 export const Battle = observer(() => {
-  const { battleStore } = useStore();
+  const { battleStore, gameStore } = useStore();
   const { counterLife, exerciseData, isPlayingSound, isCorrectAnswer } =
     battleStore;
+  const {
+    playerType,
+    heroScore,
+    rivalScore,
+    heroBattleResult,
+    rivalBattleResult,
+  } = gameStore;
   const listLetter = battleStore.getListLetter();
   const styleImage = {
     backgroundImage: exerciseData.imageSrc,
   };
+  const isBattleEnded = heroBattleResult && rivalBattleResult;
 
   const handleClickExercise = () => {
     battleStore.setPlayingSound(true);
@@ -45,7 +54,7 @@ export const Battle = observer(() => {
           </div>
           <div className="glassesWrapper">
             <span className="glassesTitle">Очки:</span>
-            <span className="glassesNumber">850</span>
+            <span className="glassesNumber">{heroScore}</span>
           </div>
         </div>
         <div className="centerContainer">0:12</div>
@@ -57,7 +66,7 @@ export const Battle = observer(() => {
             </div>
           </div>
           <div className="glassesWrapper">
-            <span className="glassesNumber">1850</span>
+            <span className="glassesNumber">{rivalScore}</span>
             <span className="glassesTitle">:Очки</span>
           </div>
         </div>
@@ -84,6 +93,9 @@ export const Battle = observer(() => {
           <div className="keyBoardItem"></div>
         </div>
       </div>
+      {playerType === PlayerType.HOST && isBattleEnded && (
+        <StartButton type="battle" />
+      )}
     </div>
   );
 });
