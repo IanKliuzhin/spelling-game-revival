@@ -1,9 +1,13 @@
 import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'src/store';
+import { LifeList } from '../../components';
 import './style.scss';
 
 export const Battle = observer(() => {
+  const { battleStore } = useStore();
+  const { listCharacter } = battleStore;
+
   // mistake - ошибка буквы
   // correctAnswer - стили состояние правильного ответа
   return (
@@ -14,11 +18,7 @@ export const Battle = observer(() => {
             <div className="avatar"></div>
             <div className="nameContainer">
               <div className="nickname">Ты</div>
-              <div className="lifeList">
-                <div className="lifeElement"></div>
-                <div className="lifeElement"></div>
-                <div className="lifeElement disabled"></div>
-              </div>
+              <LifeList count={listCharacter[0].counterLife} />
             </div>
           </div>
           <div className="glassesWrapper">
