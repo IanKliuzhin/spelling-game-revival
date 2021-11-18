@@ -8,16 +8,12 @@ export const ConnectionForm = observer(() => {
   const [gameId, setGameId] = useState('');
   const [isConnecting, setIsConnecting] = useState(false);
 
-  const { gameStore, pageStore } = useStore();
-  const { isConnected } = gameStore;
+  const { pageStore, connectionStore } = useStore();
+  const { isConnected } = connectionStore;
 
-  const handleConnectClick = () => {
+  const handleConnectClick = async () => {
     setIsConnecting(true);
-    gameStore.setGameId(gameId);
-    // TODO заменить на реальную логику подключения
-    window.setTimeout(() => {
-      gameStore.setIsConnected(true);
-    }, 500);
+    await connectionStore.startClientSession(gameId);
   };
 
   useEffect(() => {
@@ -32,6 +28,7 @@ export const ConnectionForm = observer(() => {
         'Подключение...'
       ) : (
         <div className="formWrapper">
+          Веди код игры:
           <input value={gameId} onChange={(ev) => setGameId(ev.target.value)} />
           <Button
             handleClick={() => handleConnectClick()}

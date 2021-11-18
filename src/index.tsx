@@ -1,19 +1,24 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
 import { App } from './App';
 import { reportWebVitals } from './reportWebVitals';
 import { ContextStore, createStore } from './store';
+import 'firebase/database';
+import 'webrtc-adapter';
+import './index.scss';
 
-const store = createStore();
-window.DEBUG_STORE = store;
+const runApp = () => {
+  const store = createStore();
+  window.DEBUG_STORE = store;
 
-ReactDOM.render(
-  <ContextStore.Provider value={store}>
-    <App />
-  </ContextStore.Provider>,
-  document.getElementById('root'),
-);
+  ReactDOM.render(
+    <ContextStore.Provider value={store}>
+      <App />
+    </ContextStore.Provider>,
+    document.getElementById('root'),
+  );
+};
+
+runApp();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -16,7 +16,6 @@ export class GameStore {
   difficulty = DifficultyType.EASY;
   playerType = PlayerType.HOST;
   gameId = '';
-  isConnected = false;
   rootStore: RootStore;
 
   constructor({ rootStore }: { rootStore: RootStore }) {
@@ -24,10 +23,8 @@ export class GameStore {
       difficulty: observable,
       playerType: observable,
       gameId: observable,
-      isConnected: observable,
       setDifficulty: action,
       setPlayerType: action,
-      setIsConnected: action,
       resetGame: action,
     });
 
@@ -42,17 +39,9 @@ export class GameStore {
     this.playerType = playerType;
   };
 
-  setGameId = (gameId: string) => {
-    this.gameId = gameId;
-  };
-
-  setIsConnected = (isConnected: boolean) => {
-    this.isConnected = isConnected;
-  };
-
   resetGame = () => {
     this.rootStore.pageStore.changePage('mainMenu');
-    this.isConnected = false;
+    this.rootStore.connectionStore.closeConnection();
     this.gameId = '';
   };
 }
