@@ -137,7 +137,7 @@ export class ConnectionStore implements ConnectionStoreType {
     };
   };
 
-  sendMessage = (message: MessageType) => {
+  sendMessage = (message: Message) => {
     this.channel?.send(JSON.stringify(message));
   };
 

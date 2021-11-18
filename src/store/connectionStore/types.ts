@@ -13,7 +13,7 @@ export type ConnectionStoreType = {
   startHostSession: () => Promise<void>;
   startClientSession: (connectionId: string) => Promise<void>;
   setChannel: (channel: RTCDataChannel) => void;
-  sendMessage: (message: MessageType) => void;
+  sendMessage: (message: Message) => void;
   closeConnection: () => void;
   handleMessage: (message: Message) => void;
 };
