@@ -17,6 +17,8 @@ export class BattleStore {
 
   isMistake: boolean;
 
+  isPlayingSound: boolean;
+
   activeLetter: string;
 
   constructor() {
@@ -25,21 +27,24 @@ export class BattleStore {
       listLetter: observable,
       isMistake: observable,
       activeLetter: observable,
+      isPlayingSound: observable,
       setLetter: action,
       setMistake: action,
       setActiveLetter: action,
+      setPlayingSound: action,
     });
 
     this.counterLife = 3;
     this.listLetter = ['г', 'е'];
     this.isMistake = false;
     this.activeLetter = '';
+    this.isPlayingSound = false;
 
     this.exerciseData = {
       word: 'гепард',
       soundSrc:
         'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
-      imageSrc: '',
+      imageSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
     };
   }
 
@@ -49,6 +54,10 @@ export class BattleStore {
 
   getMistake = () => {
     return this.isMistake;
+  };
+
+  setPlayingSound = (state: boolean) => {
+    this.isPlayingSound = state;
   };
 
   setMistake = (state: boolean) => {

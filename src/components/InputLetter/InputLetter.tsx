@@ -20,7 +20,6 @@ export const InputLetter = observer(() => {
     const letter = event.target.value;
     console.log(letter);
 
-
     if (letter.length > 1) {
       event.target.value = letter[0];
     }
