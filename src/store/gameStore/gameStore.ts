@@ -11,6 +11,10 @@ import {
   PlayerType,
 } from './types';
 
+const BATTLES_AMOUNT = 10;
+const REWARD_FOR_LIFE = 100;
+const REWARD_FOR_SECOND = 100;
+
 export class GameStore implements GameStoreType {
   difficulty = DifficultyType.EASY;
   playerType = PlayerType.HOST;
@@ -22,18 +26,37 @@ export class GameStore implements GameStoreType {
   rivalScore = 0;
   exercises: ExerciseDataType[] = [];
   currentBattleIndex = 0;
+  heroBattleResult: BattleResultType | null;
+  rivalBattleResult: BattleResultType | null;
 
   constructor({ rootStore }: { rootStore: RootStore }) {
     makeObservable(this, {
       difficulty: observable,
       playerType: observable,
       gameId: observable,
+      isGameStarted: observable,
+      isGameEnded: observable,
+      heroScore: observable,
+      rivalScore: observable,
+      heroBattleResult: observable,
+      rivalBattleResult: observable,
       setDifficulty: action,
       setPlayerType: action,
+      setScore: action,
+      getExercises: action,
+      startGame: action,
+      startBattle: action,
+      addScores: action,
+      saveBattleResult: action,
+      endGame: action,
+      endBattle: action,
+      saveRestartRequest: action,
       resetGame: action,
     });
 
     this.rootStore = rootStore;
+    this.heroBattleResult = null;
+    this.rivalBattleResult = null;
   }
 
   setDifficulty = (difficulty: DifficultyType) => {
@@ -62,6 +85,8 @@ export class GameStore implements GameStoreType {
   };
 
   startBattle = (exercise?: ExerciseDataType) => {
+    this.rivalBattleResult = null;
+    this.heroBattleResult = null;
     if (exercise) {
       this.rootStore.battleStore.startBattle(exercise);
     } else {
@@ -74,9 +99,27 @@ export class GameStore implements GameStoreType {
     }
   };
 
-  saveRivalResult = (result: BattleResultType) => {
-    // TODO сохранить результат противника
-    console.log('gameStore.saveRivalResult result', result);
+  addScores = () => {
+    this.heroScore +=
+      (this.heroBattleResult?.lifesLeft ?? 0) * REWARD_FOR_LIFE +
+      (this.heroBattleResult?.secondsLeft ?? 0) * REWARD_FOR_SECOND;
+    this.rivalScore +=
+      (this.rivalBattleResult?.lifesLeft ?? 0) * REWARD_FOR_LIFE +
+      (this.rivalBattleResult?.secondsLeft ?? 0) * REWARD_FOR_SECOND;
+  };
+
+  saveBattleResult = (result: BattleResultType, isRival = false) => {
+    if (isRival) {
+      this.rivalBattleResult = result;
+      if (this.heroBattleResult) this.endBattle();
+    } else {
+      this.rootStore.connectionStore.sendMessage({
+        type: MessageType.FINISH_EXERCISE,
+        ...result,
+      });
+      this.heroBattleResult = result;
+      if (this.rivalBattleResult) this.endBattle();
+    }
   };
 
   endGame = () => {
@@ -84,7 +127,8 @@ export class GameStore implements GameStoreType {
   };
 
   endBattle = () => {
-    // TODO показать результаты тура и очки
+    this.currentBattleIndex++;
+    if (this.currentBattleIndex >= BATTLES_AMOUNT) this.endGame();
   };
 
   saveRestartRequest = () => {

@@ -161,10 +161,13 @@ export class ConnectionStore implements ConnectionStoreType {
         this.rootStore.gameStore.startBattle(message.exercise);
         break;
       case MessageType.FINISH_EXERCISE:
-        this.rootStore.gameStore.saveRivalResult({
-          secondsLeft: message.secondsLeft,
-          lifesLeft: message.lifesLeft,
-        });
+        this.rootStore.gameStore.saveBattleResult(
+          {
+            secondsLeft: message.secondsLeft,
+            lifesLeft: message.lifesLeft,
+          },
+          true,
+        );
         break;
       case MessageType.END_BATTLE:
         this.rootStore.gameStore.endBattle();
