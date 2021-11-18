@@ -1,12 +1,29 @@
 import { observer } from 'mobx-react-lite';
+import { useEffect } from 'react';
 import { useStore } from 'src/store';
 import { LifeList, WordAnswer } from '../../components';
+import ReactHowler from 'react-howler';
 import './style.scss';
 
 export const Battle = observer(() => {
   const { battleStore } = useStore();
-  const { counterLife } = battleStore;
+  const { counterLife, exerciseData, isPlayingSound } = battleStore;
   const listLetter = battleStore.getListLetter();
+  const styleImage = {
+    backgroundImage: exerciseData.imageSrc,
+  };
+
+  const handleClickExercise = () => {
+    battleStore.setPlayingSound(true);
+  };
+
+  const handleEndSound = () => {
+    battleStore.setPlayingSound(false);
+  };
+
+  useEffect(() => {
+    battleStore.setPlayingSound(true);
+  }, []);
 
   // mistake - ошибка буквы
   // correctAnswer - стили состояние правильного ответа
@@ -47,7 +64,18 @@ export const Battle = observer(() => {
       </div>
       <div className="exerciseContainer">
         <div className="exercise correctAnswer">
-          <div className="imageExercise"></div>
+          <div
+            className="imageExercise"
+            style={styleImage}
+            onClick={handleClickExercise}
+          >
+            <ReactHowler
+              src={exerciseData.soundSrc}
+              playing={isPlayingSound}
+              onEnd={handleEndSound}
+            />
+            <div className="soundIcon"></div>
+          </div>
           <WordAnswer letters={listLetter} />
         </div>
       </div>
