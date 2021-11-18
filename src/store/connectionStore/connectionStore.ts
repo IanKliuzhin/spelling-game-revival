@@ -11,12 +11,13 @@ import {
 import { nanoid } from 'nanoid';
 import { firebaseConfig } from './firebaseConfig';
 import { RootStore } from '..';
+import { ConnectionStoreType } from './types';
 
 const CONNECTION_CONFIG = {
   iceServers: [{ urls: 'stun:stun2.1.google.com:19302' }],
 };
 
-export class ConnectionStore {
+export class ConnectionStore implements ConnectionStoreType {
   db: Database;
   connectionId: string | null = null;
   connection: RTCPeerConnection | null = null;
@@ -124,7 +125,7 @@ export class ConnectionStore {
     });
   };
 
-  setChannel(channel: RTCDataChannel) {
+  setChannel = (channel: RTCDataChannel) => {
     this.channel = channel;
     this.channel.onmessage = (ev) => {
       const data = JSON.parse(ev.data);
@@ -133,11 +134,11 @@ export class ConnectionStore {
     this.channel.onclose = () => {
       this.rootStore.gameStore.resetGame();
     };
-  }
+  };
 
-  sendData(data: Record<string, unknown>) {
-    this.channel?.send(JSON.stringify(data));
-  }
+  sendMessage = (message: MessageType) => {
+    this.channel?.send(JSON.stringify(message));
+  };
 
   closeConnection = () => {
     remove(ref(this.db, `${this.connectionId}`));
