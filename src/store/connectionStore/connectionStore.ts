@@ -11,12 +11,13 @@ import {
 import { nanoid } from 'nanoid';
 import { firebaseConfig } from './firebaseConfig';
 import { RootStore } from '..';
+import { ConnectionStoreType, Message, MessageType } from './types';
 
 const CONNECTION_CONFIG = {
   iceServers: [{ urls: 'stun:stun2.1.google.com:19302' }],
 };
 
-export class ConnectionStore {
+export class ConnectionStore implements ConnectionStoreType {
   db: Database;
   connectionId: string | null = null;
   connection: RTCPeerConnection | null = null;
@@ -124,20 +125,21 @@ export class ConnectionStore {
     });
   };
 
-  setChannel(channel: RTCDataChannel) {
+  setChannel = (channel: RTCDataChannel) => {
     this.channel = channel;
     this.channel.onmessage = (ev) => {
       const data = JSON.parse(ev.data);
       console.log('got data by channel', data);
+      this.handleMessage(data);
     };
     this.channel.onclose = () => {
       this.rootStore.gameStore.resetGame();
     };
-  }
+  };
 
-  sendData(data: Record<string, unknown>) {
-    this.channel?.send(JSON.stringify(data));
-  }
+  sendMessage = (message: MessageType) => {
+    this.channel?.send(JSON.stringify(message));
+  };
 
   closeConnection = () => {
     remove(ref(this.db, `${this.connectionId}`));
@@ -148,5 +150,33 @@ export class ConnectionStore {
     this.connection = null;
     this.connectionId = null;
     this.isConnected = false;
+  };
+
+  handleMessage = (message: Message) => {
+    switch (message.type) {
+      case MessageType.START_GAME:
+        this.rootStore.gameStore.startGame();
+        break;
+      case MessageType.START_BATTLE:
+        this.rootStore.gameStore.startBattle(message.task);
+        break;
+      case MessageType.FINISH_TASK:
+        this.rootStore.gameStore.saveRivalResult({
+          secondsLeft: message.secondsLeft,
+          lifesLeft: message.lifesLeft,
+        });
+        break;
+      case MessageType.END_BATTLE:
+        this.rootStore.gameStore.endBattle();
+        break;
+      case MessageType.END_GAME:
+        this.rootStore.gameStore.endGame();
+        break;
+      case MessageType.REQUEST_RESTART:
+        this.rootStore.gameStore.saveRestartRequest();
+        break;
+      default:
+        break;
+    }
   };
 }
