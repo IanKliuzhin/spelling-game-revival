@@ -128,11 +128,21 @@ export class GameStore implements GameStoreType {
 
   endGame = () => {
     this.isGameEnded = true;
+    this.rootStore.pageStore.changePage('battleInfo');
   };
 
   endBattle = () => {
     this.currentBattleIndex++;
-    if (this.currentBattleIndex >= BATTLES_AMOUNT) this.endGame();
+
+    if (
+      this.currentBattleIndex >= BATTLES_AMOUNT &&
+      this.playerType === PlayerType.HOST
+    ) {
+      this.rootStore.connectionStore.sendMessage({
+        type: MessageType.END_GAME,
+      });
+      this.endGame();
+    }
   };
 
   saveRestartRequest = () => {

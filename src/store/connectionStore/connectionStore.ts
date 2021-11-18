@@ -169,9 +169,6 @@ export class ConnectionStore implements ConnectionStoreType {
           true,
         );
         break;
-      case MessageType.END_BATTLE:
-        this.rootStore.gameStore.endBattle();
-        break;
       case MessageType.END_GAME:
         this.rootStore.gameStore.endGame();
         break;

@@ -22,7 +22,6 @@ export enum MessageType {
   START_GAME = 'start-game',
   START_BATTLE = 'start-battle',
   FINISH_EXERCISE = 'finish-exercise',
-  END_BATTLE = 'end-battle',
   END_GAME = 'end-game',
   REQUEST_RESTART = 'request-restart',
 }
@@ -39,9 +38,6 @@ export type Message =
       type: MessageType.FINISH_EXERCISE;
       secondsLeft: number;
       lifesLeft: number;
-    }
-  | {
-      type: MessageType.END_BATTLE;
     }
   | {
       type: MessageType.END_GAME;
