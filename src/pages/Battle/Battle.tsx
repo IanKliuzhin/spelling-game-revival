@@ -6,6 +6,7 @@ import { Countdown, LifeList, StartButton, WordAnswer } from 'src/components';
 import ReactHowler from 'react-howler';
 import cn from 'classnames';
 import './style.scss';
+import { toJS } from 'mobx';
 
 export const Battle = observer(() => {
   const { battleStore, gameStore } = useStore();
@@ -25,7 +26,7 @@ export const Battle = observer(() => {
   } = gameStore;
   const listLetter = battleStore.getListLetter();
   const styleImage = {
-    backgroundImage: exerciseData.imageSrc,
+    backgroundImage: exerciseData?.imageSrc,
   };
   const isBattleEnded = heroBattleResult && rivalBattleResult;
 
@@ -40,18 +41,15 @@ export const Battle = observer(() => {
   };
 
   useEffect(() => {
-    battleStore.setPlayingSound(true);
-    battleStore.startTimer();
-  }, []);
-
-  useEffect(() => {
     setIsCountdownGoing(true);
   }, [exerciseData]);
 
   const countdownCallback = () => {
     setIsCountdownGoing(false);
+    battleStore.setPlayingSound(true);
+    battleStore.startTimer();
   };
-
+  console.log(toJS(exerciseData));
   const styleAnswer = cn('exercise', { correctAnswer: isCorrectAnswer });
 
   // mistake - ошибка буквы
@@ -98,11 +96,14 @@ export const Battle = observer(() => {
                 style={styleImage}
                 onClick={handleClickExercise}
               >
-                <ReactHowler
-                  src={exerciseData.soundSrc}
-                  playing={isPlayingSound}
-                  onEnd={handleEndSound}
-                />
+                {exerciseData && (
+                  <ReactHowler
+                    src={exerciseData.soundSrc}
+                    playing={isPlayingSound}
+                    onEnd={handleEndSound}
+                    format={['mp3']}
+                  />
+                )}
                 <div className="soundIcon"></div>
               </div>
               <WordAnswer

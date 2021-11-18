@@ -11,7 +11,7 @@ import {
   PlayerType,
 } from './types';
 
-const BATTLES_AMOUNT = 10;
+const BATTLES_AMOUNT = 2;
 const REWARD_FOR_LIFE = 100;
 const REWARD_FOR_SECOND = 100;
 
@@ -133,7 +133,7 @@ export class GameStore implements GameStoreType {
 
   endBattle = () => {
     this.currentBattleIndex++;
-
+    this.addScores();
     if (
       this.currentBattleIndex >= BATTLES_AMOUNT &&
       this.playerType === PlayerType.HOST

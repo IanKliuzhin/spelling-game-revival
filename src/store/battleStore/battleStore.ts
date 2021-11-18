@@ -1,4 +1,5 @@
 import { action, makeObservable, observable } from 'mobx';
+import { RootStore } from '..';
 
 export type ExerciseDataType = {
   word: string;
@@ -6,10 +7,14 @@ export type ExerciseDataType = {
   imageSrc: string;
 };
 
+import { BattleResultType } from '../gameStore/types';
+
 export type TimerType = number;
 
 export class BattleStore {
-  exerciseData: ExerciseDataType;
+  exerciseData: ExerciseDataType | null = null;
+
+  rootStore: RootStore;
 
   counterLife: number;
 
@@ -29,7 +34,7 @@ export class BattleStore {
 
   deadline: string;
 
-  constructor() {
+  constructor({ rootStore }: { rootStore: RootStore }) {
     makeObservable(this, {
       counterLife: observable,
       listLetter: observable,
@@ -40,15 +45,20 @@ export class BattleStore {
       counterTimer: observable,
       timerId: observable,
       deadline: observable,
+      exerciseData: observable,
       setLetter: action,
       setMistake: action,
       setActiveLetter: action,
       setPlayingSound: action,
       timer: action,
+      updateTimer: action,
+      startBattle: action,
+      endBattle: action,
     });
 
+    this.rootStore = rootStore;
     this.counterLife = 3;
-    this.listLetter = ['г', 'е'];
+    this.listLetter = [];
     this.isMistake = false;
     this.activeLetter = '';
     this.isPlayingSound = false;
@@ -57,13 +67,26 @@ export class BattleStore {
     this.timerId = 0;
     this.deadline = '20';
 
-    this.exerciseData = {
-      word: 'гепард',
-      soundSrc:
-        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
-      imageSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
-    };
+    // this.exerciseData = {
+    //   word: 'ггепард',
+    //   soundSrc:
+    //     'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
+    //   imageSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+    // };
   }
+
+  startBattle = (exercise: ExerciseDataType) => {
+    this.counterTimer = 20;
+    this.listLetter = [];
+    this.counterLife = 3;
+    this.timerId = 0;
+    this.deadline = '20';
+    this.exerciseData = exercise;
+    this.isMistake = false;
+    this.activeLetter = '';
+    this.isPlayingSound = false;
+    this.isCorrectAnswer = false;
+  };
 
   updateTimer = () => {
     this.counterTimer -= 1;
@@ -73,7 +96,7 @@ export class BattleStore {
     }
 
     if (this.counterTimer === 0) {
-      this.endBattle();
+      this.limitDeadline();
     }
   };
 
@@ -83,6 +106,10 @@ export class BattleStore {
 
   startTimer = () => {
     this.timer();
+  };
+
+  limitDeadline = () => {
+    this.endBattle();
   };
 
   setActiveLetter = (letter: string) => {
@@ -108,14 +135,14 @@ export class BattleStore {
   setLetter = (letter: string) => {
     this.setActiveLetter(letter);
     this.checkMistake(this.checkLetter(letter));
-    if (this.getMistake()) return;
+    if (this.isMistake) return;
     this.listLetter.push(letter);
     this.setActiveLetter('');
     this.checkWord();
   };
 
   checkWord = () => {
-    if (this.listLetter.length === this.exerciseData.word.length) {
+    if (this.listLetter.length === this.exerciseData?.word.length) {
       this.endBattle();
     }
   };
@@ -125,26 +152,19 @@ export class BattleStore {
   };
 
   checkLetter = (letter: string) => {
-    const valueLetter = this.exerciseData.word.indexOf(letter);
     const countLetters = this.listLetter.length;
-    const mistake = valueLetter === countLetters ? false : true;
+    const valueLetter = this.exerciseData?.word[countLetters];
+    const mistake = valueLetter === letter ? false : true;
     return mistake;
-  };
-
-  startBattle = (exercise: ExerciseDataType) => {
-    // TODO сохранение текущего задания, сброс жизней на 3, сброс таймера на 10
-    console.log('exercise', exercise);
   };
 
   endBattle = () => {
     this.isCorrectAnswer = true;
-    // TODO отправка в гейм стор результата
-    // const result: BattleResultType = {
-    //   secondsLeft: 2,
-    //   lifesLeft: 2,
-    // };
-    // this.rootStore.gameStore.saveBattleResult(result);
-    console.log(this.counterTimer);
     clearInterval(this.timerId);
+    const result: BattleResultType = {
+      secondsLeft: this.counterTimer,
+      lifesLeft: this.counterLife,
+    };
+    this.rootStore.gameStore.saveBattleResult(result);
   };
 }

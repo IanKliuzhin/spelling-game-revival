@@ -10,16 +10,11 @@ export const WordAnswer = observer(
     letters: string[];
     isCorrectAnswer: boolean;
   }) => {
-    const listLetter = [];
-    for (const index in letters) {
-      listLetter.push(
-        <LetterAnswer letter={letters[index]} key={`LetterAnswer_${index}`} />,
-      );
-    }
-
     return (
       <div className="wordAnswer">
-        {listLetter}
+        {letters.map((item, index) => (
+          <LetterAnswer letter={item} key={`LetterAnswer_${index}`} />
+        ))}
         {!isCorrectAnswer && <InputLetter />}
       </div>
     );
