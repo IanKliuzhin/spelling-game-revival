@@ -19,6 +19,8 @@ export class BattleStore {
 
   isPlayingSound: boolean;
 
+  isCorrectAnswer: boolean;
+
   activeLetter: string;
 
   constructor() {
@@ -28,6 +30,7 @@ export class BattleStore {
       isMistake: observable,
       activeLetter: observable,
       isPlayingSound: observable,
+      isCorrectAnswer: observable,
       setLetter: action,
       setMistake: action,
       setActiveLetter: action,
@@ -39,6 +42,7 @@ export class BattleStore {
     this.isMistake = false;
     this.activeLetter = '';
     this.isPlayingSound = false;
+    this.isCorrectAnswer = false;
 
     this.exerciseData = {
       word: 'гепард',
@@ -61,7 +65,6 @@ export class BattleStore {
   };
 
   setMistake = (state: boolean) => {
-    console.log('setMistake');
     this.isMistake = state;
   };
 
@@ -75,6 +78,13 @@ export class BattleStore {
     if (this.getMistake()) return;
     this.listLetter.push(letter);
     this.setActiveLetter('');
+    this.checkWord();
+  };
+
+  checkWord = () => {
+    if (this.listLetter.length === this.exerciseData.word.length) {
+      this.endBattle();
+    }
   };
 
   checkMistake = (isMistake: boolean) => {
@@ -86,5 +96,9 @@ export class BattleStore {
     const countLetters = this.listLetter.length;
     const mistake = valueLetter === countLetters ? false : true;
     return mistake;
+  };
+
+  endBattle = () => {
+    this.isCorrectAnswer = true;
   };
 }
