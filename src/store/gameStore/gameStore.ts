@@ -3,9 +3,14 @@ import { shuffle } from 'src/utils/helpers';
 import { RootStore } from '..';
 import { ExerciseDataType } from '../battleStore';
 import { exercises } from './exercises';
-import { BattleResultType, DifficultyType, PlayerType } from './types';
+import {
+  BattleResultType,
+  DifficultyType,
+  GameStoreType,
+  PlayerType,
+} from './types';
 
-export class GameStore {
+export class GameStore implements GameStoreType {
   difficulty = DifficultyType.EASY;
   playerType = PlayerType.HOST;
   gameId = '';
