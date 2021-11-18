@@ -73,7 +73,10 @@ export class GameStore implements GameStoreType {
   };
 
   getExercises = () => {
-    this.exercises = shuffle(exercises[this.difficulty]).slice(0, 10);
+    this.exercises = shuffle(exercises[this.difficulty]).slice(
+      0,
+      BATTLES_AMOUNT,
+    );
     console.log('this.exercises', this.exercises);
   };
 

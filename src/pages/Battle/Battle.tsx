@@ -4,8 +4,9 @@ import { LifeList, WordAnswer } from '../../components';
 import './style.scss';
 
 export const Battle = observer(() => {
-  const { battleStore } = useStore();
+  const { battleStore, gameStore } = useStore();
   const { counterLife } = battleStore;
+  const { heroScore, rivalScore } = gameStore;
   const listLetter = battleStore.getListLetter();
 
   // mistake - ошибка буквы
@@ -23,7 +24,7 @@ export const Battle = observer(() => {
           </div>
           <div className="glassesWrapper">
             <span className="glassesTitle">Очки:</span>
-            <span className="glassesNumber">850</span>
+            <span className="glassesNumber">{heroScore}</span>
           </div>
         </div>
         <div className="centerContainer">0:12</div>
@@ -40,7 +41,7 @@ export const Battle = observer(() => {
             </div>
           </div>
           <div className="glassesWrapper">
-            <span className="glassesNumber">1850</span>
+            <span className="glassesNumber">{rivalScore}</span>
             <span className="glassesTitle">:Очки</span>
           </div>
         </div>
