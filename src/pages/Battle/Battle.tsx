@@ -9,8 +9,13 @@ import './style.scss';
 
 export const Battle = observer(() => {
   const { battleStore, gameStore } = useStore();
-  const { counterLife, exerciseData, isPlayingSound, isCorrectAnswer } =
-    battleStore;
+  const {
+    counterLife,
+    exerciseData,
+    isPlayingSound,
+    isCorrectAnswer,
+    deadline,
+  } = battleStore;
   const {
     playerType,
     heroScore,
@@ -34,6 +39,7 @@ export const Battle = observer(() => {
 
   useEffect(() => {
     battleStore.setPlayingSound(true);
+    battleStore.startTimer();
   }, []);
 
   const styleAnswer = cn('exercise', { correctAnswer: isCorrectAnswer });
@@ -57,7 +63,7 @@ export const Battle = observer(() => {
             <span className="glassesNumber">{heroScore}</span>
           </div>
         </div>
-        <div className="centerContainer">0:12</div>
+        <div className="centerContainer">{`0:${deadline}`}</div>
         <div className="rightContainer characterInfoContainer">
           <div className="topLine">
             <div className="avatar"></div>

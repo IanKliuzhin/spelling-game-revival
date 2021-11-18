@@ -23,6 +23,12 @@ export class BattleStore {
 
   activeLetter: string;
 
+  counterTimer: number;
+
+  timerId: number;
+
+  deadline: string;
+
   constructor() {
     makeObservable(this, {
       counterLife: observable,
@@ -31,10 +37,14 @@ export class BattleStore {
       activeLetter: observable,
       isPlayingSound: observable,
       isCorrectAnswer: observable,
+      counterTimer: observable,
+      timerId: observable,
+      deadline: observable,
       setLetter: action,
       setMistake: action,
       setActiveLetter: action,
       setPlayingSound: action,
+      timer: action,
     });
 
     this.counterLife = 3;
@@ -43,6 +53,9 @@ export class BattleStore {
     this.activeLetter = '';
     this.isPlayingSound = false;
     this.isCorrectAnswer = false;
+    this.counterTimer = 20;
+    this.timerId = 0;
+    this.deadline = '20';
 
     this.exerciseData = {
       word: 'гепард',
@@ -51,6 +64,26 @@ export class BattleStore {
       imageSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
     };
   }
+
+  updateTimer = () => {
+    this.counterTimer -= 1;
+    this.deadline = `${this.counterTimer}`;
+    if (this.counterTimer < 10) {
+      this.deadline = `0${this.counterTimer}`;
+    }
+
+    if (this.counterTimer === 0) {
+      this.endBattle();
+    }
+  };
+
+  timer = () => {
+    this.timerId = window.setInterval(this.updateTimer, 1000);
+  };
+
+  startTimer = () => {
+    this.timer();
+  };
 
   setActiveLetter = (letter: string) => {
     this.activeLetter = letter;
@@ -111,5 +144,7 @@ export class BattleStore {
     //   lifesLeft: 2,
     // };
     // this.rootStore.gameStore.saveBattleResult(result);
+    console.log(this.counterTimer);
+    clearInterval(this.timerId);
   };
 }
