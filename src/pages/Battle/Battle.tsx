@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useStore } from 'src/store';
 import { PlayerType } from 'src/store/gameStore';
-import { LifeList, StartButton, WordAnswer } from 'src/components';
+import { Countdown, LifeList, StartButton, WordAnswer } from 'src/components';
 import ReactHowler from 'react-howler';
 import cn from 'classnames';
 import './style.scss';
@@ -24,6 +24,8 @@ export const Battle = observer(() => {
   };
   const isBattleEnded = heroBattleResult && rivalBattleResult;
 
+  const [isCountdownGoing, setIsCountdownGoing] = useState(false);
+
   const handleClickExercise = () => {
     battleStore.setPlayingSound(true);
   };
@@ -35,6 +37,14 @@ export const Battle = observer(() => {
   useEffect(() => {
     battleStore.setPlayingSound(true);
   }, []);
+
+  useEffect(() => {
+    setIsCountdownGoing(true);
+  }, [exerciseData]);
+
+  const countdownCallback = () => {
+    setIsCountdownGoing(false);
+  };
 
   const styleAnswer = cn('exercise', { correctAnswer: isCorrectAnswer });
 
@@ -71,28 +81,37 @@ export const Battle = observer(() => {
           </div>
         </div>
       </div>
-      <div className="exerciseContainer">
-        <div className={styleAnswer}>
-          <div
-            className="imageExercise"
-            style={styleImage}
-            onClick={handleClickExercise}
-          >
-            <ReactHowler
-              src={exerciseData.soundSrc}
-              playing={isPlayingSound}
-              onEnd={handleEndSound}
-            />
-            <div className="soundIcon"></div>
+      {isCountdownGoing ? (
+        <Countdown callback={countdownCallback} />
+      ) : (
+        <>
+          <div className="exerciseContainer">
+            <div className={styleAnswer}>
+              <div
+                className="imageExercise"
+                style={styleImage}
+                onClick={handleClickExercise}
+              >
+                <ReactHowler
+                  src={exerciseData.soundSrc}
+                  playing={isPlayingSound}
+                  onEnd={handleEndSound}
+                />
+                <div className="soundIcon"></div>
+              </div>
+              <WordAnswer
+                letters={listLetter}
+                isCorrectAnswer={isCorrectAnswer}
+              />
+            </div>
           </div>
-          <WordAnswer letters={listLetter} isCorrectAnswer={isCorrectAnswer} />
-        </div>
-      </div>
-      <div className="keyBoardWrapper">
-        <div className="keyBoardContainer">
-          <div className="keyBoardItem"></div>
-        </div>
-      </div>
+          <div className="keyBoardWrapper">
+            <div className="keyBoardContainer">
+              <div className="keyBoardItem"></div>
+            </div>
+          </div>
+        </>
+      )}
       {playerType === PlayerType.HOST && isBattleEnded && (
         <StartButton type="battle" />
       )}
