@@ -4,232 +4,277 @@ export const exercises: Exercises = {
   [DifficultyType.EASY]: [
     {
       word: 'народ',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'слева',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'халат',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'рекорд',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'вокруг',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'пакгауз',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'давить',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'налево',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'гараж',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'опушка',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'адъюнкт',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'архаизм',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'аккорд',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'озон',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'корзина',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
   ],
   [DifficultyType.MEDIUM]: [
     {
       word: 'ноябрь',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'питомец',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'колосс',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'сувенир',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'мятеж',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'жюри',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'этикет',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'витязь',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'диплом',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'кипяток',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'втройне',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'сканер',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'огурец',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'пшеница',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'панцирь',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
   ],
   [DifficultyType.HARD]: [
     {
       word: 'багаж',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'массаж',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'вброд',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'доныне',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'портрет',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'сеанс',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'осина',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'ладоши',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'амплуа',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'интерес',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'балет',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'престол',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'щеколда',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'пример',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
     {
       word: 'мебель',
-      soundSrc: '/',
-      imageSrc: '/',
+      soundSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+      imageSrc:
+        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
     },
   ],
 };
