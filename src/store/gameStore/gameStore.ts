@@ -1,5 +1,6 @@
 import { action, makeObservable, observable } from 'mobx';
 import { RootStore } from '..';
+import { ExerciseDataType } from '../battleStore';
 
 export enum DifficultyType {
   EASY = 'easy',
@@ -15,13 +16,6 @@ export enum PlayerType {
 export type BattleResultType = {
   secondsLeft: number;
   lifesLeft: number;
-};
-
-// TODO брать из общего места
-export type TaskType = {
-  word: string;
-  soundSrc: string;
-  imageSrc: string;
 };
 
 export class GameStore {
@@ -59,9 +53,9 @@ export class GameStore {
     this.rootStore.pageStore.changePage('battle');
   };
 
-  startBattle = (task: TaskType) => {
+  startBattle = (exercise: ExerciseDataType) => {
     // TODO передать word battleStore и начать exercise
-    console.log('gameStore.startBattle task', task);
+    console.log('gameStore.startBattle exercise', exercise);
   };
 
   saveRivalResult = (result: BattleResultType) => {

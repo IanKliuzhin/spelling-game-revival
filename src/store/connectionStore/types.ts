@@ -1,6 +1,6 @@
 import { Database } from '@firebase/database';
 import { RootStore } from '..';
-import { TaskType } from '../gameStore';
+import { ExerciseDataType } from '../battleStore';
 
 export type ConnectionStoreType = {
   db: Database;
@@ -21,7 +21,7 @@ export type ConnectionStoreType = {
 export enum MessageType {
   START_GAME = 'start-game',
   START_BATTLE = 'start-battle',
-  FINISH_TASK = 'finish-task',
+  FINISH_EXERCISE = 'finish-exercise',
   END_BATTLE = 'end-battle',
   END_GAME = 'end-game',
   REQUEST_RESTART = 'request-restart',
@@ -33,10 +33,10 @@ export type Message =
     }
   | {
       type: MessageType.START_BATTLE;
-      task: TaskType;
+      exercise: ExerciseDataType;
     }
   | {
-      type: MessageType.FINISH_TASK;
+      type: MessageType.FINISH_EXERCISE;
       secondsLeft: number;
       lifesLeft: number;
     }
