@@ -1,13 +1,21 @@
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'src/store';
-import { LifeList, WordAnswer } from '../../components';
+import { PlayerType } from 'src/store/gameStore';
+import { LifeList, StartButton, WordAnswer } from 'src/components';
 import './style.scss';
 
 export const Battle = observer(() => {
   const { battleStore, gameStore } = useStore();
   const { counterLife } = battleStore;
-  const { heroScore, rivalScore } = gameStore;
+  const {
+    playerType,
+    heroScore,
+    rivalScore,
+    heroBattleResult,
+    rivalBattleResult,
+  } = gameStore;
   const listLetter = battleStore.getListLetter();
+  const isBattleEnded = heroBattleResult && rivalBattleResult;
 
   // mistake - ошибка буквы
   // correctAnswer - стили состояние правильного ответа
@@ -57,6 +65,9 @@ export const Battle = observer(() => {
           <div className="keyBoardItem"></div>
         </div>
       </div>
+      {playerType === PlayerType.HOST && isBattleEnded && (
+        <StartButton type="battle" />
+      )}
     </div>
   );
 });

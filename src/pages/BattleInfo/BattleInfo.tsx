@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'src/store';
-import { MainMenuButton, StartGameButton } from 'src/components';
+import { MainMenuButton, StartButton } from 'src/components';
 import { PlayerType } from 'src/store/gameStore';
 import './style.scss';
 
@@ -24,7 +24,9 @@ export const BattleInfo = observer(() => {
         'Ожидание соперника...'
       )}
       <MainMenuButton />
-      {isConnected && <StartGameButton />}
+      {isConnected && playerType === PlayerType.HOST && (
+        <StartButton type="game" />
+      )}
     </div>
   );
 });

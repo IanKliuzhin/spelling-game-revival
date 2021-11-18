@@ -85,6 +85,7 @@ export class GameStore implements GameStoreType {
     this.setScore(0, 0);
     this.isGameStarted = true;
     this.rootStore.pageStore.changePage('battle');
+    if (this.playerType === PlayerType.HOST) this.startBattle();
   };
 
   startBattle = (exercise?: ExerciseDataType) => {
