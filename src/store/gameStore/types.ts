@@ -29,12 +29,13 @@ export type GameStoreType = {
   heroScore: number;
   rivalScore: number;
   exercises: ExerciseDataType[];
+  currentBattleIndex: number;
   setDifficulty: (difficulty: DifficultyType) => void;
   setPlayerType: (playerType: PlayerType) => void;
   setScore: (heroScore: number, rivalScore: number) => void;
   getExercises: () => void;
   startGame: () => void;
-  startBattle: (exercise: ExerciseDataType) => void;
+  startBattle: (exercise?: ExerciseDataType) => void;
   saveRivalResult: (result: BattleResultType) => void;
   endGame: () => void;
   endBattle: () => void;

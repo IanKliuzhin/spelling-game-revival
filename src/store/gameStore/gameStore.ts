@@ -2,6 +2,7 @@ import { action, makeObservable, observable } from 'mobx';
 import { shuffle } from 'src/utils/helpers';
 import { RootStore } from '..';
 import { ExerciseDataType } from '../battleStore';
+import { MessageType } from '../connectionStore';
 import { exercises } from './exercises';
 import {
   BattleResultType,
@@ -20,6 +21,7 @@ export class GameStore implements GameStoreType {
   heroScore = 0;
   rivalScore = 0;
   exercises: ExerciseDataType[] = [];
+  currentBattleIndex = 0;
 
   constructor({ rootStore }: { rootStore: RootStore }) {
     makeObservable(this, {
@@ -59,9 +61,17 @@ export class GameStore implements GameStoreType {
     this.rootStore.pageStore.changePage('battle');
   };
 
-  startBattle = (exercise: ExerciseDataType) => {
-    // TODO передать word battleStore и начать exercise
-    console.log('gameStore.startBattle exercise', exercise);
+  startBattle = (exercise?: ExerciseDataType) => {
+    if (exercise) {
+      this.rootStore.battleStore.startBattle(exercise);
+    } else {
+      const exercise = this.exercises[this.currentBattleIndex];
+      this.rootStore.connectionStore.sendMessage({
+        type: MessageType.START_BATTLE,
+        exercise,
+      });
+      this.rootStore.battleStore.startBattle(exercise);
+    }
   };
 
   saveRivalResult = (result: BattleResultType) => {
