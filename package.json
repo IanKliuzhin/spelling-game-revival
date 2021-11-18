@@ -5,6 +5,7 @@
   "devDependencies": {
     "@types/react": "^17.0.35",
     "@types/react-dom": "^17.0.11",
+    "@types/react-howler": "^3.7.3",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
     "eslint": "^7.20.0",
@@ -34,6 +35,7 @@
     "nanoid": "^3.1.30",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-howler": "^5.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1",
     "webrtc-adapter": "^8.1.0"

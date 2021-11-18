@@ -149,6 +149,7 @@
 }
 
 .imageExercise {
+  position: relative;
   width: 296px;
   height: 200px;
   background-color: grey;
@@ -157,6 +158,19 @@
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 16px;
+  cursor: pointer;
+}
+
+.soundIcon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  background-image: url('./img/soundIcon.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
 
 .inputExercise {

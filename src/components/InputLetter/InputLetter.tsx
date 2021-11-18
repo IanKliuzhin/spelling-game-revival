@@ -7,8 +7,6 @@ export const InputLetter = observer(() => {
   const { battleStore } = useStore();
   const { activeLetter } = battleStore;
   const isHide = false;
-  console.log('getMistake');
-  console.log(battleStore.getMistake());
   const isMistake = battleStore.getMistake();
 
   const styleContainer = cn('inputLetterContainer', {
@@ -18,9 +16,6 @@ export const InputLetter = observer(() => {
 
   const handleChangeInput = (event: any) => {
     const letter = event.target.value;
-    console.log(letter);
-
-
     if (letter.length > 1) {
       event.target.value = letter[0];
     }
