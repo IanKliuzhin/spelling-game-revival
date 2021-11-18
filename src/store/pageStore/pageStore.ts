@@ -8,7 +8,7 @@ export type PageNameType =
   | 'battle';
 
 export class PageStore {
-  activePageName: PageNameType = 'battle';
+  activePageName: PageNameType = 'mainMenu';
   constructor() {
     makeObservable(this, {
       activePageName: observable,

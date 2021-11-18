@@ -31,4 +31,13 @@
     text-align: center;
     letter-spacing: 0.04em;
   }
+
+  .battleCode {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: IBM Plex Sans;
+    font-size: 16px;
+  }
 }

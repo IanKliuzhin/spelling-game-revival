@@ -1,24 +1,21 @@
-import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'src/store';
-import './style.scss';
 import { MainMenuButton } from 'src/components';
+import { PlayerType } from 'src/store/gameStore';
+import './style.scss';
 
 export const BattleInfo = observer(() => {
-  const { gameStore } = useStore();
-  const { isConnected } = gameStore;
-
-  // TODO убрать после появления настоящей логики соединения
-  useEffect(() => {
-    if (!isConnected) {
-      window.setTimeout(() => {
-        gameStore.setIsConnected(true);
-      }, 3000);
-    }
-  }, [isConnected]);
+  const { gameStore, connectionStore } = useStore();
+  const { isConnected, connectionId } = connectionStore;
+  const { playerType } = gameStore;
 
   return (
     <div className="battleInfo">
+      {playerType === PlayerType.HOST && (
+        <div className="battleCode">
+          Код игры: {connectionId}. Отправь его сопернику для подключения.
+        </div>
+      )}
       <div className="fighter hero"></div>
       <div className="versus">VS</div>
       {isConnected ? (

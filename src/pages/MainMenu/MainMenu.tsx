@@ -4,11 +4,12 @@ import { PlayerType } from 'src/store/gameStore';
 import './style.scss';
 
 export const MainMenu = () => {
-  const { gameStore, pageStore } = useStore();
+  const { gameStore, pageStore, connectionStore } = useStore();
 
   const handleCreateGameClick = () => {
     gameStore.setPlayerType(PlayerType.HOST);
     pageStore.changePage('difficultyChoice');
+    connectionStore.startHostSession();
   };
 
   const handleConnectClick = () => {
