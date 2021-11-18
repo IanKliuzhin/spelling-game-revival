@@ -1,22 +1,9 @@
 import { action, makeObservable, observable } from 'mobx';
+import { shuffle } from 'src/utils/helpers';
 import { RootStore } from '..';
 import { ExerciseDataType } from '../battleStore';
-
-export enum DifficultyType {
-  EASY = 'easy',
-  MEDIUM = 'medium',
-  HARD = 'hard',
-}
-
-export enum PlayerType {
-  HOST = 'host',
-  CLIENT = 'client',
-}
-
-export type BattleResultType = {
-  secondsLeft: number;
-  lifesLeft: number;
-};
+import { exercises } from './exercises';
+import { BattleResultType, DifficultyType, PlayerType } from './types';
 
 export class GameStore {
   difficulty = DifficultyType.EASY;
@@ -25,6 +12,9 @@ export class GameStore {
   rootStore: RootStore;
   isGameStarted = false;
   isGameEnded = false;
+  heroScore = 0;
+  rivalScore = 0;
+  exercises: ExerciseDataType[] = [];
 
   constructor({ rootStore }: { rootStore: RootStore }) {
     makeObservable(this, {
@@ -47,8 +37,19 @@ export class GameStore {
     this.playerType = playerType;
   };
 
+  setScore = (heroScore: number, rivalScore: number) => {
+    this.heroScore = heroScore;
+    this.rivalScore = rivalScore;
+  };
+
+  getExercises = () => {
+    this.exercises = shuffle(exercises[this.difficulty]).slice(0, 10);
+    console.log('this.exercises', this.exercises);
+  };
+
   startGame = () => {
-    // TODO сбросить очки
+    this.getExercises();
+    this.setScore(0, 0);
     this.isGameStarted = true;
     this.rootStore.pageStore.changePage('battle');
   };
