@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'src/store';
-import { MainMenuButton } from 'src/components';
+import { MainMenuButton, StartGameButton } from 'src/components';
 import { PlayerType } from 'src/store/gameStore';
 import './style.scss';
 
@@ -24,6 +24,7 @@ export const BattleInfo = observer(() => {
         'Ожидание соперника...'
       )}
       <MainMenuButton />
+      {isConnected && <StartGameButton />}
     </div>
   );
 });

@@ -56,6 +56,7 @@ export class GameStore {
   startGame = () => {
     // TODO сбросить очки
     this.isGameStarted = true;
+    this.rootStore.pageStore.changePage('battle');
   };
 
   startBattle = (task: TaskType) => {
