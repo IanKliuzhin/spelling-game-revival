@@ -1,0 +1,34 @@
+.lifeElement {
+  position: relative;
+  height: 24px;
+  width: 24px;
+  background-color: red;
+  transform: rotate(-45deg);
+
+  &:before, &:after {
+    content: "";
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background-color: red;
+  }
+
+  &:before {
+    top: -15px;
+    left: 0;
+  }
+
+  &:after {
+    left: 15px;
+    top: 0;
+  }
+
+  &.disabledElem {
+    background-color: grey;
+
+    &:before, &:after{
+      background-color: grey;
+    }
+  }
+}
