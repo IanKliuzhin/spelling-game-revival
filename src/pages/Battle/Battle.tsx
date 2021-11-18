@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'src/store';
-import { LifeList } from '../../components';
+import { LifeList, WordAnswer } from '../../components';
 import './style.scss';
 
 export const Battle = observer(() => {
   const { battleStore } = useStore();
-  const { listCharacter } = battleStore;
+  const { counterLife } = battleStore;
+  const listLetter = battleStore.getListLetter();
 
   // mistake - ошибка буквы
   // correctAnswer - стили состояние правильного ответа
@@ -18,7 +18,7 @@ export const Battle = observer(() => {
             <div className="avatar"></div>
             <div className="nameContainer">
               <div className="nickname">Ты</div>
-              <LifeList count={listCharacter[0].counterLife} />
+              <LifeList count={counterLife} />
             </div>
           </div>
           <div className="glassesWrapper">
@@ -48,11 +48,7 @@ export const Battle = observer(() => {
       <div className="exerciseContainer">
         <div className="exercise correctAnswer">
           <div className="imageExercise"></div>
-          <div className="inputExercise">
-            <div className="letterExercise">г</div>
-            <div className="letterExercise">е</div>
-            <div className="letterExercise mistake">р</div>
-          </div>
+          <WordAnswer letters={listLetter} />
         </div>
       </div>
       <div className="keyBoardWrapper">

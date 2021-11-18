@@ -1,0 +1,30 @@
+.inputLetterContainer {
+  display: flex;
+  margin-left: -9px;
+
+  &.hide{
+    display: none;
+  }
+}
+
+.inputLetter {
+  width: 50px;
+  font-weight: 600;
+  font-size: 80px;
+  line-height: 104px;
+  text-align: center;
+  letter-spacing: 0.04em;
+  border: 0;
+  background: transparent;
+  font-family: sans-serif;
+  outline:none;
+
+  &:focus, &:focus-visible {
+    border: 0;
+    background: transparent;
+  }
+
+  .mistake & {
+    color: red;
+  }
+}
