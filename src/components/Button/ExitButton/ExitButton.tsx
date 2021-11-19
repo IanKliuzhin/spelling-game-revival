@@ -3,11 +3,15 @@ import { useStore } from 'src/store';
 
 export const ExitButton = () => {
   const { gameStore } = useStore();
+  const { isGameStarted, isGameEnded } = gameStore;
+  const isGameUp = isGameStarted && !isGameEnded;
   return (
     <Button
       type={ButtonType.MAIN_MENU}
-      handleClick={() => gameStore.abortGame()}
-      text="На главную"
+      handleClick={() =>
+        isGameUp ? gameStore.giveUp() : gameStore.abortGame()
+      }
+      text={isGameUp ? 'Сдаться' : 'На главную'}
     />
   );
 };
