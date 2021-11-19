@@ -1,4 +1,4 @@
-import { Button, MainMenuButton } from 'src/components';
+import { Button, ExitButton } from 'src/components';
 import { useStore } from 'src/store';
 import { DifficultyType } from 'src/store/gameStore';
 import './style.scss';
@@ -11,18 +11,25 @@ export const DifficultyChoice = () => {
     pageStore.changePage('battleInfo');
   };
 
+  const listButtonName = {
+    [DifficultyType.EASY]: 'Легкий',
+    [DifficultyType.MEDIUM]: 'Средний',
+    [DifficultyType.HARD]: 'Тяжёлый',
+  };
+
   return (
     <div className="difficultyPage">
+      <div className="titlePage">Выбор сложности</div>
       <div className="wrapperButton">
         {Object.values(DifficultyType).map((difficulty) => (
           <Button
             key={difficulty}
             handleClick={() => handleDifficultyChoice(difficulty)}
-            text={difficulty}
+            text={listButtonName[difficulty]}
           />
         ))}
       </div>
-      <MainMenuButton />
+      <ExitButton />
     </div>
   );
 };

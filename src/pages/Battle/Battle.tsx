@@ -4,9 +4,10 @@ import { useStore } from 'src/store';
 import { PlayerType } from 'src/store/gameStore';
 import {
   BattleResult,
-  Countdown,
-  LifeList,
   Score,
+  Countdown,
+  ExitButton,
+  LifeList,
   StartButton,
   WordAnswer,
 } from 'src/components';
@@ -124,6 +125,7 @@ export const Battle = observer(() => {
               <div className="keyBoardItem"></div>
             </div>
           </div>
+          <ExitButton />
         </>
       )}
       {playerType === PlayerType.HOST && isBattleEnded && (
