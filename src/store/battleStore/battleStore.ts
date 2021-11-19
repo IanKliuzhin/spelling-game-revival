@@ -1,5 +1,6 @@
 import { action, makeObservable, observable } from 'mobx';
 import { RootStore } from '..';
+import { MessageType } from '../connectionStore';
 
 export type ExerciseDataType = {
   word: string;
@@ -144,6 +145,9 @@ export class BattleStore {
     this.checkMistake(this.checkLetter(letter));
     if (this.isMistake) {
       this.counterLife -= 1;
+      this.rootStore.connectionStore.sendMessage({
+        type: MessageType.REDUCE_LIFES,
+      });
       this.checkCountLife();
       return;
     }
