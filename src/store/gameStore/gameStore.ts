@@ -14,6 +14,7 @@ import {
 const BATTLES_AMOUNT = 10;
 const REWARD_FOR_LIFE = 100;
 const REWARD_FOR_SECOND = 100;
+const START_LIFES_AMOUNT = 3;
 
 export class GameStore implements GameStoreType {
   difficulty = DifficultyType.EASY;
@@ -29,6 +30,8 @@ export class GameStore implements GameStoreType {
   rivalBattleResult: BattleResultType | null;
   hasRivalRequestedRestart = false;
   hasHeroRequestedRestart = false;
+  START_LIFES_AMOUNT = START_LIFES_AMOUNT;
+  rivalLifesAmount = START_LIFES_AMOUNT;
 
   constructor({ rootStore }: { rootStore: RootStore }) {
     makeObservable(this, {
@@ -42,6 +45,7 @@ export class GameStore implements GameStoreType {
       rivalBattleResult: observable,
       hasRivalRequestedRestart: observable,
       hasHeroRequestedRestart: observable,
+      rivalLifesAmount: observable,
       setDifficulty: action,
       setPlayerType: action,
       setScore: action,
@@ -53,6 +57,7 @@ export class GameStore implements GameStoreType {
       endGame: action,
       endBattle: action,
       saveRestartRequest: action,
+      reduceRivalLifes: action,
       abortGame: action,
     });
 
@@ -86,6 +91,7 @@ export class GameStore implements GameStoreType {
     this.currentBattleIndex = 0;
     this.hasRivalRequestedRestart = false;
     this.hasHeroRequestedRestart = false;
+    this.rivalLifesAmount = this.START_LIFES_AMOUNT;
     this.rootStore.pageStore.changePage('battle');
     if (this.playerType === PlayerType.HOST) {
       this.rootStore.connectionStore.sendMessage({
@@ -169,6 +175,10 @@ export class GameStore implements GameStoreType {
     ) {
       this.startGame();
     }
+  };
+
+  reduceRivalLifes = () => {
+    this.rivalLifesAmount--;
   };
 
   abortGame = () => {

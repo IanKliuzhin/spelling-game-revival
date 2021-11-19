@@ -57,7 +57,7 @@ export class BattleStore {
     });
 
     this.rootStore = rootStore;
-    this.counterLife = 3;
+    this.counterLife = this.rootStore.gameStore.START_LIFES_AMOUNT;
     this.listLetter = [];
     this.isMistake = false;
     this.activeLetter = '';
@@ -78,7 +78,7 @@ export class BattleStore {
   startBattle = (exercise: ExerciseDataType) => {
     this.counterTimer = 20;
     this.listLetter = [];
-    this.counterLife = 3;
+    this.counterLife = this.rootStore.gameStore.START_LIFES_AMOUNT;
     this.timerId = 0;
     this.deadline = '20';
     this.exerciseData = exercise;
