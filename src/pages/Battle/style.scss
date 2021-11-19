@@ -146,6 +146,10 @@
   &.correctAnswer {
     background-color: #d0ffd5;
   }
+
+  &.losing {
+    background-color: #ff4800;
+  }
 }
 
 .imageExercise {
