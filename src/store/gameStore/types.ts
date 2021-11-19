@@ -35,6 +35,8 @@ export type GameStoreType = {
   hasHeroRequestedRestart: boolean;
   rivalLifesAmount: number;
   START_LIFES_AMOUNT: number;
+  REWARD_FOR_SECOND: number;
+  REWARD_FOR_LIFE: number;
   setDifficulty: (difficulty: DifficultyType) => void;
   setPlayerType: (playerType: PlayerType) => void;
   setScore: (heroScore: number, rivalScore: number) => void;

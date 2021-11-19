@@ -7,3 +7,5 @@ export const shuffle = <T>(array: T[]): T[] => {
 
   return arrayCopy;
 };
+
+export const range = (length: number) => Array.from({ length }, (_, i) => i);

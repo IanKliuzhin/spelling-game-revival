@@ -17,6 +17,9 @@ const REWARD_FOR_SECOND = 100;
 const START_LIFES_AMOUNT = 3;
 
 export class GameStore implements GameStoreType {
+  START_LIFES_AMOUNT = START_LIFES_AMOUNT;
+  REWARD_FOR_SECOND = REWARD_FOR_SECOND;
+  REWARD_FOR_LIFE = REWARD_FOR_LIFE;
   difficulty = DifficultyType.EASY;
   playerType = PlayerType.HOST;
   gameId = '';
@@ -30,7 +33,6 @@ export class GameStore implements GameStoreType {
   rivalBattleResult: BattleResultType | null;
   hasRivalRequestedRestart = false;
   hasHeroRequestedRestart = false;
-  START_LIFES_AMOUNT = START_LIFES_AMOUNT;
   rivalLifesAmount = START_LIFES_AMOUNT;
 
   constructor({ rootStore }: { rootStore: RootStore }) {

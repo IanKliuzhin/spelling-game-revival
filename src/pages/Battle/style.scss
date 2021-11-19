@@ -188,3 +188,10 @@
   background: #C4C4C4;
   border-radius: 32px;
 }
+
+// ==========
+.battleResultWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useStore } from 'src/store';
 import { PlayerType } from 'src/store/gameStore';
 import {
+  BattleResult,
   Countdown,
   LifeList,
   Score,
@@ -24,14 +25,8 @@ export const Battle = observer(() => {
     deadline,
     losing,
   } = battleStore;
-  const {
-    playerType,
-    heroScore,
-    rivalScore,
-    heroBattleResult,
-    rivalBattleResult,
-    rivalLifesAmount,
-  } = gameStore;
+  const { playerType, heroBattleResult, rivalBattleResult, rivalLifesAmount } =
+    gameStore;
   const listLetter = battleStore.getListLetter();
   const styleImage = {
     backgroundImage: `url(${exerciseData?.imageSrc})`,
@@ -91,7 +86,12 @@ export const Battle = observer(() => {
           <Score isRival />
         </div>
       </div>
-      {isCountdownGoing ? (
+      {isBattleEnded ? (
+        <div className="battleResultWrapper">
+          <BattleResult />
+          <BattleResult isRival />
+        </div>
+      ) : isCountdownGoing ? (
         <Countdown callback={countdownCallback} />
       ) : (
         <>
