@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
-import { Button, MainMenuButton } from 'src/components';
+import { MainMenuButton } from 'src/components';
 import { useStore } from 'src/store';
 import './style.scss';
 
@@ -11,7 +11,7 @@ export const ConnectionForm = observer(() => {
   const { pageStore, connectionStore } = useStore();
   const { isConnected } = connectionStore;
 
-  const handleConnectClick = async () => {
+  const handleSubmit = async () => {
     setIsConnecting(true);
     await connectionStore.startClientSession(gameId);
   };
@@ -27,14 +27,16 @@ export const ConnectionForm = observer(() => {
       {isConnecting ? (
         'Подключение...'
       ) : (
-        <div className="formWrapper">
+        <form className="formWrapper" onSubmit={handleSubmit}>
           Веди код игры:
-          <input value={gameId} onChange={(ev) => setGameId(ev.target.value)} />
-          <Button
-            handleClick={() => handleConnectClick()}
-            text="Подключиться"
+          <input
+            value={gameId}
+            onChange={(ev) => setGameId(ev.target.value)}
+            placeholder="Введите код"
+            className="input"
           />
-        </div>
+          <input value="Подключиться" type="submit" className="button" />
+        </form>
       )}
       <MainMenuButton />
     </div>
