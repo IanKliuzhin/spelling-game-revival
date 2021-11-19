@@ -34,6 +34,8 @@ export class BattleStore {
 
   deadline: string;
 
+  losing: boolean;
+
   constructor({ rootStore }: { rootStore: RootStore }) {
     makeObservable(this, {
       counterLife: observable,
@@ -46,6 +48,7 @@ export class BattleStore {
       timerId: observable,
       deadline: observable,
       exerciseData: observable,
+      losing: observable,
       setLetter: action,
       setMistake: action,
       setActiveLetter: action,
@@ -66,12 +69,13 @@ export class BattleStore {
     this.counterTimer = 20;
     this.timerId = 0;
     this.deadline = '20';
+    this.losing = false;
 
     // this.exerciseData = {
-    //   word: 'ггепард',
+    //   word: 'акула',
     //   soundSrc:
-    //     'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
-    //   imageSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
+    //     'https://cms-content.uchi.ru/audios/reading/lesson_2_7/2.7_UROK_1.8.mp3',
+    //   imageSrc: '/imagesWords/akula.jpg',
     // };
   }
 
@@ -86,6 +90,7 @@ export class BattleStore {
     this.activeLetter = '';
     this.isPlayingSound = false;
     this.isCorrectAnswer = false;
+    this.losing = false;
   };
 
   updateTimer = () => {
@@ -109,6 +114,8 @@ export class BattleStore {
   };
 
   limitDeadline = () => {
+    this.losing = true;
+    this.addLetters();
     this.endBattle();
   };
 
@@ -135,10 +142,21 @@ export class BattleStore {
   setLetter = (letter: string) => {
     this.setActiveLetter(letter);
     this.checkMistake(this.checkLetter(letter));
-    if (this.isMistake) return;
+    if (this.isMistake) {
+      this.counterLife -= 1;
+      this.checkCountLife();
+      return;
+    }
     this.listLetter.push(letter);
     this.setActiveLetter('');
     this.checkWord();
+  };
+
+  checkCountLife = () => {
+    if (this.counterLife === 0) {
+      this.losing = true;
+      this.endBattle();
+    }
   };
 
   checkWord = () => {
@@ -158,8 +176,15 @@ export class BattleStore {
     return mistake;
   };
 
+  addLetters = () => {
+    const countLetters = this.listLetter.length;
+    const wordExercise = this.exerciseData?.word;
+    const added = wordExercise?.slice(countLetters);
+    added?.split('').map((elem: string) => this.listLetter.push(elem));
+  };
+
   endBattle = () => {
-    this.isCorrectAnswer = true;
+    if (!this.losing) this.isCorrectAnswer = true;
     clearInterval(this.timerId);
     const result: BattleResultType = {
       secondsLeft: this.counterTimer,

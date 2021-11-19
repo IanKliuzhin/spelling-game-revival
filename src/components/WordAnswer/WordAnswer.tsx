@@ -6,16 +6,18 @@ export const WordAnswer = observer(
   ({
     letters,
     isCorrectAnswer,
+    losing,
   }: {
     letters: string[];
     isCorrectAnswer: boolean;
+    losing: boolean;
   }) => {
     return (
       <div className="wordAnswer">
         {letters.map((item, index) => (
           <LetterAnswer letter={item} key={`LetterAnswer_${index}`} />
         ))}
-        {!isCorrectAnswer && <InputLetter />}
+        {!isCorrectAnswer && !losing && <InputLetter />}
       </div>
     );
   },

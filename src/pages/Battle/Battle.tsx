@@ -16,6 +16,7 @@ export const Battle = observer(() => {
     isPlayingSound,
     isCorrectAnswer,
     deadline,
+    losing,
   } = battleStore;
   const {
     playerType,
@@ -26,7 +27,7 @@ export const Battle = observer(() => {
   } = gameStore;
   const listLetter = battleStore.getListLetter();
   const styleImage = {
-    backgroundImage: exerciseData?.imageSrc,
+    backgroundImage: `url(${exerciseData?.imageSrc})`,
   };
   const isBattleEnded = heroBattleResult && rivalBattleResult;
 
@@ -50,7 +51,10 @@ export const Battle = observer(() => {
     battleStore.setPlayingSound(true);
     battleStore.startTimer();
   };
-  const styleAnswer = cn('exercise', { correctAnswer: isCorrectAnswer });
+  const styleAnswer = cn('exercise', {
+    correctAnswer: isCorrectAnswer,
+    losing: losing,
+  });
 
   // mistake - ошибка буквы
   // correctAnswer - стили состояние правильного ответа
@@ -109,6 +113,7 @@ export const Battle = observer(() => {
               <WordAnswer
                 letters={listLetter}
                 isCorrectAnswer={isCorrectAnswer}
+                losing={losing}
               />
             </div>
           </div>
