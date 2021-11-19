@@ -178,6 +178,9 @@ export class ConnectionStore implements ConnectionStoreType {
       case MessageType.REQUEST_RESTART:
         this.rootStore.gameStore.saveRestartRequest(true);
         break;
+      case MessageType.GIVE_UP:
+        this.rootStore.gameStore.giveUp(true);
+        break;
       default:
         break;
     }

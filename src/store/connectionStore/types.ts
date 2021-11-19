@@ -25,6 +25,7 @@ export enum MessageType {
   FINISH_EXERCISE = 'finish-exercise',
   END_GAME = 'end-game',
   REQUEST_RESTART = 'request-restart',
+  GIVE_UP = 'give-up',
 }
 
 export type Message =
@@ -48,4 +49,7 @@ export type Message =
     }
   | {
       type: MessageType.REQUEST_RESTART;
+    }
+  | {
+      type: MessageType.GIVE_UP;
     };

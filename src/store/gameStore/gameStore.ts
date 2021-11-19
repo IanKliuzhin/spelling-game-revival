@@ -21,6 +21,7 @@ export class GameStore implements GameStoreType {
   playerType = PlayerType.HOST;
   gameId = '';
   rootStore: RootStore;
+  isGameStarted = false;
   isGameEnded = false;
   heroScore = 0;
   rivalScore = 0;
@@ -38,6 +39,7 @@ export class GameStore implements GameStoreType {
       difficulty: observable,
       playerType: observable,
       gameId: observable,
+      isGameStarted: observable,
       isGameEnded: observable,
       heroScore: observable,
       rivalScore: observable,
@@ -59,6 +61,7 @@ export class GameStore implements GameStoreType {
       saveRestartRequest: action,
       reduceRivalLifes: action,
       abortGame: action,
+      giveUp: action,
     });
 
     this.rootStore = rootStore;
@@ -105,6 +108,7 @@ export class GameStore implements GameStoreType {
   startBattle = (exercise?: ExerciseDataType) => {
     this.rivalBattleResult = null;
     this.heroBattleResult = null;
+    this.isGameStarted = true;
     if (exercise) {
       this.rootStore.battleStore.startBattle(exercise);
     } else {
@@ -185,5 +189,17 @@ export class GameStore implements GameStoreType {
     this.rootStore.pageStore.changePage('mainMenu');
     this.rootStore.connectionStore.closeConnection();
     this.gameId = '';
+  };
+
+  giveUp = (isRival = false) => {
+    if (isRival) {
+      this.rivalScore = -1;
+    } else {
+      this.heroScore = -1;
+      this.rootStore.connectionStore.sendMessage({
+        type: MessageType.GIVE_UP,
+      });
+    }
+    this.endGame();
   };
 }

@@ -2,7 +2,13 @@ import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { useStore } from 'src/store';
 import { PlayerType } from 'src/store/gameStore';
-import { Countdown, LifeList, StartButton, WordAnswer } from 'src/components';
+import {
+  Countdown,
+  ExitButton,
+  LifeList,
+  StartButton,
+  WordAnswer,
+} from 'src/components';
 import ReactHowler from 'react-howler';
 import cn from 'classnames';
 import './style.scss';
@@ -124,6 +130,7 @@ export const Battle = observer(() => {
               <div className="keyBoardItem"></div>
             </div>
           </div>
+          <ExitButton />
         </>
       )}
       {playerType === PlayerType.HOST && isBattleEnded && (

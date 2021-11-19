@@ -24,6 +24,7 @@ export type GameStoreType = {
   playerType: PlayerType;
   gameId: string;
   rootStore: RootStore;
+  isGameStarted: boolean;
   isGameEnded: boolean;
   heroScore: number;
   rivalScore: number;
@@ -48,4 +49,5 @@ export type GameStoreType = {
   saveRestartRequest: () => void;
   reduceRivalLifes: () => void;
   abortGame: () => void;
+  giveUp: () => void;
 };
