@@ -14,7 +14,7 @@ export class RootStore {
     this.pageStore = new PageStore();
     this.gameStore = new GameStore({ rootStore: this });
     this.connectionStore = new ConnectionStore({ rootStore: this });
-    this.battleStore = new BattleStore();
+    this.battleStore = new BattleStore({ rootStore: this });
   }
 }
 

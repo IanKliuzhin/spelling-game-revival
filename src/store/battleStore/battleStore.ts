@@ -1,4 +1,6 @@
 import { action, makeObservable, observable } from 'mobx';
+import { RootStore } from '..';
+import { MessageType } from '../connectionStore';
 
 export type ExerciseDataType = {
   word: string;
@@ -6,10 +8,14 @@ export type ExerciseDataType = {
   imageSrc: string;
 };
 
+import { BattleResultType } from '../gameStore/types';
+
 export type TimerType = number;
 
 export class BattleStore {
-  exerciseData: ExerciseDataType;
+  exerciseData: ExerciseDataType | null = null;
+
+  rootStore: RootStore;
 
   counterLife: number;
 
@@ -23,7 +29,15 @@ export class BattleStore {
 
   activeLetter: string;
 
-  constructor() {
+  counterTimer: number;
+
+  timerId: number;
+
+  deadline: string;
+
+  losing: boolean;
+
+  constructor({ rootStore }: { rootStore: RootStore }) {
     makeObservable(this, {
       counterLife: observable,
       listLetter: observable,
@@ -31,26 +45,80 @@ export class BattleStore {
       activeLetter: observable,
       isPlayingSound: observable,
       isCorrectAnswer: observable,
+      counterTimer: observable,
+      timerId: observable,
+      deadline: observable,
+      exerciseData: observable,
+      losing: observable,
       setLetter: action,
       setMistake: action,
       setActiveLetter: action,
       setPlayingSound: action,
+      timer: action,
+      updateTimer: action,
+      startBattle: action,
+      endBattle: action,
     });
 
-    this.counterLife = 3;
-    this.listLetter = ['г', 'е'];
+    this.rootStore = rootStore;
+    this.counterLife = this.rootStore.gameStore.START_LIFES_AMOUNT;
+    this.listLetter = [];
     this.isMistake = false;
     this.activeLetter = '';
     this.isPlayingSound = false;
     this.isCorrectAnswer = false;
+    this.counterTimer = 20;
+    this.timerId = 0;
+    this.deadline = '20';
+    this.losing = false;
 
-    this.exerciseData = {
-      word: 'гепард',
-      soundSrc:
-        'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
-      imageSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
-    };
+    // this.exerciseData = {
+    //   word: 'акула',
+    //   soundSrc:
+    //     'https://cms-content.uchi.ru/audios/reading/lesson_2_7/2.7_UROK_1.8.mp3',
+    //   imageSrc: '/imagesWords/akula.jpg',
+    // };
   }
+
+  startBattle = (exercise: ExerciseDataType) => {
+    this.counterTimer = 20;
+    this.listLetter = [];
+    this.counterLife = this.rootStore.gameStore.START_LIFES_AMOUNT;
+    this.timerId = 0;
+    this.deadline = '20';
+    this.exerciseData = exercise;
+    this.isMistake = false;
+    this.activeLetter = '';
+    this.isPlayingSound = false;
+    this.isCorrectAnswer = false;
+    this.losing = false;
+  };
+
+  updateTimer = () => {
+    this.counterTimer -= 1;
+    this.deadline = `${this.counterTimer}`;
+    if (this.counterTimer < 10) {
+      this.deadline = `0${this.counterTimer}`;
+    }
+
+    if (this.counterTimer === 0) {
+      this.limitDeadline();
+    }
+  };
+
+  timer = () => {
+    this.timerId = window.setInterval(this.updateTimer, 1000);
+  };
+
+  startTimer = () => {
+    this.timer();
+  };
+
+  limitDeadline = () => {
+    this.losing = true;
+    this.addLetters();
+    this.endBattle();
+  };
 
   setActiveLetter = (letter: string) => {
     this.activeLetter = letter;
@@ -75,14 +143,29 @@ export class BattleStore {
   setLetter = (letter: string) => {
     this.setActiveLetter(letter);
     this.checkMistake(this.checkLetter(letter));
-    if (this.getMistake()) return;
+    if (this.isMistake) {
+      this.counterLife -= 1;
+      this.rootStore.connectionStore.sendMessage({
+        type: MessageType.REDUCE_LIFES,
+      });
+      this.checkCountLife();
+      return;
+    }
     this.listLetter.push(letter);
     this.setActiveLetter('');
     this.checkWord();
   };
 
+  checkCountLife = () => {
+    if (this.counterLife === 0) {
+      this.losing = true;
+      this.addLetters();
+      this.endBattle();
+    }
+  };
+
   checkWord = () => {
-    if (this.listLetter.length === this.exerciseData.word.length) {
+    if (this.listLetter.length === this.exerciseData?.word.length) {
       this.endBattle();
     }
   };
@@ -92,24 +175,26 @@ export class BattleStore {
   };
 
   checkLetter = (letter: string) => {
-    const valueLetter = this.exerciseData.word.indexOf(letter);
     const countLetters = this.listLetter.length;
-    const mistake = valueLetter === countLetters ? false : true;
+    const valueLetter = this.exerciseData?.word[countLetters];
+    const mistake = valueLetter === letter ? false : true;
     return mistake;
   };
 
-  startBattle = (exercise: ExerciseDataType) => {
-    // TODO сохранение текущего задания, сброс жизней на 3, сброс таймера на 10
-    console.log('exercise', exercise);
+  addLetters = () => {
+    const countLetters = this.listLetter.length;
+    const wordExercise = this.exerciseData?.word;
+    const added = wordExercise?.slice(countLetters);
+    added?.split('').map((elem: string) => this.listLetter.push(elem));
   };
 
   endBattle = () => {
-    this.isCorrectAnswer = true;
-    // TODO отправка в гейм стор результата
-    // const result: BattleResultType = {
-    //   secondsLeft: 2,
-    //   lifesLeft: 2,
-    // };
-    // this.rootStore.gameStore.saveBattleResult(result);
+    if (!this.losing) this.isCorrectAnswer = true;
+    clearInterval(this.timerId);
+    const result: BattleResultType = {
+      secondsLeft: this.counterTimer,
+      lifesLeft: this.counterLife,
+    };
+    this.rootStore.gameStore.saveBattleResult(result);
   };
 }

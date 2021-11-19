@@ -4,10 +4,22 @@
   display: grid;
   justify-content: center;
   align-items: center;
+  justify-items: center;
+  align-content: space-evenly;
 }
 
 .wrapperButton {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.titlePage {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 88px;
+  line-height: 114px;
+  text-align: center;
+  letter-spacing: 0.04em;
+  color: #334066;
 }

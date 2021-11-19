@@ -1,0 +1,71 @@
+.battleResult {
+  width: 50%;
+  box-sizing: border-box;
+  padding: 0 40px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+
+  .scoreWrapper {
+    margin-top: 20px;
+    white-space: pre;
+
+    .scoreImage {
+      width: 150px;
+      display: flex;
+      align-items: center;
+    }
+
+    .icon {
+      position: relative;
+      height: 46px;
+      width: 46px;
+    }
+
+      &.life {
+        .icon{
+          background-color: red;
+          transform: rotate(-45deg);
+          height: 24px;
+          width: 24px;
+          margin: 0 11px;
+  
+          &:before, &:after {
+            content: "";
+            position: absolute;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background-color: red;
+          }
+        
+          &:before {
+            top: -15px;
+            left: 0;
+          }
+        
+          &:after {
+            left: 15px;
+            top: 0;
+          }
+        }
+      }
+
+      &.time {
+        .icon {
+          background: url('./img/time.svg') center/contain no-repeat;
+        }
+      }
+
+      &.score {
+        border-top: 3px solid black;
+        padding-top: 10px;
+
+        .icon {
+          height: 68px;
+          width: 68px;
+          background: url('../Score/img/star.svg') center/contain no-repeat;
+        }
+      }
+  }
+}

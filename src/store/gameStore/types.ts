@@ -32,6 +32,12 @@ export type GameStoreType = {
   currentBattleIndex: number;
   heroBattleResult: BattleResultType | null;
   rivalBattleResult: BattleResultType | null;
+  hasRivalRequestedRestart: boolean;
+  hasHeroRequestedRestart: boolean;
+  rivalLifesAmount: number;
+  START_LIFES_AMOUNT: number;
+  REWARD_FOR_SECOND: number;
+  REWARD_FOR_LIFE: number;
   setDifficulty: (difficulty: DifficultyType) => void;
   setPlayerType: (playerType: PlayerType) => void;
   setScore: (heroScore: number, rivalScore: number) => void;
@@ -43,5 +49,7 @@ export type GameStoreType = {
   endGame: () => void;
   endBattle: () => void;
   saveRestartRequest: () => void;
-  resetGame: () => void;
+  reduceRivalLifes: () => void;
+  abortGame: () => void;
+  giveUp: () => void;
 };

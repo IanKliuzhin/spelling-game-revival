@@ -21,9 +21,11 @@ export type ConnectionStoreType = {
 export enum MessageType {
   START_GAME = 'start-game',
   START_BATTLE = 'start-battle',
+  REDUCE_LIFES = 'reduce-lifes',
   FINISH_EXERCISE = 'finish-exercise',
   END_GAME = 'end-game',
   REQUEST_RESTART = 'request-restart',
+  GIVE_UP = 'give-up',
 }
 
 export type Message =
@@ -35,6 +37,9 @@ export type Message =
       exercise: ExerciseDataType;
     }
   | {
+      type: MessageType.REDUCE_LIFES;
+    }
+  | {
       type: MessageType.FINISH_EXERCISE;
       secondsLeft: number;
       lifesLeft: number;
@@ -44,4 +49,7 @@ export type Message =
     }
   | {
       type: MessageType.REQUEST_RESTART;
+    }
+  | {
+      type: MessageType.GIVE_UP;
     };

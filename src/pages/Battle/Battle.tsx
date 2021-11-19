@@ -2,25 +2,35 @@ import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { useStore } from 'src/store';
 import { PlayerType } from 'src/store/gameStore';
-import { Countdown, LifeList, StartButton, WordAnswer } from 'src/components';
+import {
+  BattleResult,
+  Score,
+  Countdown,
+  ExitButton,
+  LifeList,
+  StartButton,
+  WordAnswer,
+} from 'src/components';
 import ReactHowler from 'react-howler';
 import cn from 'classnames';
 import './style.scss';
+import { toJS } from 'mobx';
 
 export const Battle = observer(() => {
   const { battleStore, gameStore } = useStore();
-  const { counterLife, exerciseData, isPlayingSound, isCorrectAnswer } =
-    battleStore;
   const {
-    playerType,
-    heroScore,
-    rivalScore,
-    heroBattleResult,
-    rivalBattleResult,
-  } = gameStore;
+    counterLife,
+    exerciseData,
+    isPlayingSound,
+    isCorrectAnswer,
+    deadline,
+    losing,
+  } = battleStore;
+  const { playerType, heroBattleResult, rivalBattleResult, rivalLifesAmount } =
+    gameStore;
   const listLetter = battleStore.getListLetter();
   const styleImage = {
-    backgroundImage: exerciseData.imageSrc,
+    backgroundImage: `url(${exerciseData?.imageSrc})`,
   };
   const isBattleEnded = heroBattleResult && rivalBattleResult;
 
@@ -35,18 +45,19 @@ export const Battle = observer(() => {
   };
 
   useEffect(() => {
-    battleStore.setPlayingSound(true);
-  }, []);
-
-  useEffect(() => {
     setIsCountdownGoing(true);
+    console.log(toJS(exerciseData));
   }, [exerciseData]);
 
   const countdownCallback = () => {
     setIsCountdownGoing(false);
+    battleStore.setPlayingSound(true);
+    battleStore.startTimer();
   };
-
-  const styleAnswer = cn('exercise', { correctAnswer: isCorrectAnswer });
+  const styleAnswer = cn('exercise', {
+    correctAnswer: isCorrectAnswer,
+    losing: losing,
+  });
 
   // mistake - ошибка буквы
   // correctAnswer - стили состояние правильного ответа
@@ -62,26 +73,26 @@ export const Battle = observer(() => {
               <LifeList count={counterLife} />
             </div>
           </div>
-          <div className="glassesWrapper">
-            <span className="glassesTitle">Очки:</span>
-            <span className="glassesNumber">{heroScore}</span>
-          </div>
+          <Score />
         </div>
-        <div className="centerContainer">0:12</div>
+        <div className="centerContainer">{`0:${deadline}`}</div>
         <div className="rightContainer characterInfoContainer">
           <div className="topLine">
             <div className="avatar"></div>
             <div className="nameContainer">
               <div className="nickname">Соперник</div>
+              <LifeList count={rivalLifesAmount} />
             </div>
           </div>
-          <div className="glassesWrapper">
-            <span className="glassesNumber">{rivalScore}</span>
-            <span className="glassesTitle">:Очки</span>
-          </div>
+          <Score isRival />
         </div>
       </div>
-      {isCountdownGoing ? (
+      {isBattleEnded ? (
+        <div className="battleResultWrapper">
+          <BattleResult />
+          <BattleResult isRival />
+        </div>
+      ) : isCountdownGoing ? (
         <Countdown callback={countdownCallback} />
       ) : (
         <>
@@ -92,16 +103,20 @@ export const Battle = observer(() => {
                 style={styleImage}
                 onClick={handleClickExercise}
               >
-                <ReactHowler
-                  src={exerciseData.soundSrc}
-                  playing={isPlayingSound}
-                  onEnd={handleEndSound}
-                />
+                {exerciseData && (
+                  <ReactHowler
+                    src={exerciseData.soundSrc}
+                    playing={isPlayingSound}
+                    onEnd={handleEndSound}
+                    format={['mp3']}
+                  />
+                )}
                 <div className="soundIcon"></div>
               </div>
               <WordAnswer
                 letters={listLetter}
                 isCorrectAnswer={isCorrectAnswer}
+                losing={losing}
               />
             </div>
           </div>
@@ -110,6 +125,7 @@ export const Battle = observer(() => {
               <div className="keyBoardItem"></div>
             </div>
           </div>
+          <ExitButton />
         </>
       )}
       {playerType === PlayerType.HOST && isBattleEnded && (

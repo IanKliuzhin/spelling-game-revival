@@ -1,17 +1,13 @@
 import { Button, ButtonType } from 'src/components';
 import { useStore } from 'src/store';
-import { MessageType } from 'src/store/connectionStore/types';
 
 export const StartButton = ({ type }: { type: 'game' | 'battle' }) => {
-  const { gameStore, connectionStore } = useStore();
+  const { gameStore } = useStore();
   const { isGameEnded } = gameStore;
   const handleClick = () => {
     switch (type) {
       case 'game':
-        connectionStore.sendMessage({
-          type: MessageType.START_GAME,
-        });
-        gameStore.startGame();
+        isGameEnded ? gameStore.saveRestartRequest() : gameStore.startGame();
         break;
       case 'battle':
         gameStore.startBattle();

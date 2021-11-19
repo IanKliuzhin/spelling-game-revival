@@ -1,7 +1,7 @@
 .pageBattle {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: min-content 15rem 15rem;
+  grid-template-rows: min-content 15rem 5rem;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   gap: 15px;
@@ -89,26 +89,6 @@
   }
 }
 
-.glassesWrapper {
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 31px;
-  letter-spacing: 0.04em;
-
-  color: #535E7E;
-}
-
-.glassesTitle {
-  display: inline-block;
-  margin-right: 5px;
-
-  .rightContainer & {
-    margin-right: 0;
-    margin-left: 5px;
-  }
-}
-
 .centerContainer {
   font-style: normal;
   font-weight: bold;
@@ -146,6 +126,10 @@
   &.correctAnswer {
     background-color: #d0ffd5;
   }
+
+  &.losing {
+    background-color: #ff4800;
+  }
 }
 
 .imageExercise {
@@ -153,7 +137,6 @@
   width: 296px;
   height: 200px;
   background-color: grey;
-  background-image: url('./img/exercise.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -204,4 +187,11 @@
   grid-area: keyBoardContainer;
   background: #C4C4C4;
   border-radius: 32px;
+}
+
+// ==========
+.battleResultWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
 }

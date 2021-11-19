@@ -46,7 +46,7 @@ export class ConnectionStore implements ConnectionStoreType {
     this.connectionId = nanoid(5);
     this.connection.oniceconnectionstatechange = () => {
       if (this.connection?.iceConnectionState === 'disconnected') {
-        this.rootStore.gameStore.resetGame();
+        this.rootStore.gameStore.abortGame();
       }
     };
 
@@ -133,7 +133,7 @@ export class ConnectionStore implements ConnectionStoreType {
       this.handleMessage(data);
     };
     this.channel.onclose = () => {
-      this.rootStore.gameStore.resetGame();
+      this.rootStore.gameStore.abortGame();
     };
   };
 
@@ -160,6 +160,9 @@ export class ConnectionStore implements ConnectionStoreType {
       case MessageType.START_BATTLE:
         this.rootStore.gameStore.startBattle(message.exercise);
         break;
+      case MessageType.REDUCE_LIFES:
+        this.rootStore.gameStore.reduceRivalLifes();
+        break;
       case MessageType.FINISH_EXERCISE:
         this.rootStore.gameStore.saveBattleResult(
           {
@@ -173,7 +176,10 @@ export class ConnectionStore implements ConnectionStoreType {
         this.rootStore.gameStore.endGame();
         break;
       case MessageType.REQUEST_RESTART:
-        this.rootStore.gameStore.saveRestartRequest();
+        this.rootStore.gameStore.saveRestartRequest(true);
+        break;
+      case MessageType.GIVE_UP:
+        this.rootStore.gameStore.giveUp(true);
         break;
       default:
         break;

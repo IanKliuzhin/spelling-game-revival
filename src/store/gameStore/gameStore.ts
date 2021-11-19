@@ -14,8 +14,12 @@ import {
 const BATTLES_AMOUNT = 10;
 const REWARD_FOR_LIFE = 100;
 const REWARD_FOR_SECOND = 100;
+const START_LIFES_AMOUNT = 3;
 
 export class GameStore implements GameStoreType {
+  START_LIFES_AMOUNT = START_LIFES_AMOUNT;
+  REWARD_FOR_SECOND = REWARD_FOR_SECOND;
+  REWARD_FOR_LIFE = REWARD_FOR_LIFE;
   difficulty = DifficultyType.EASY;
   playerType = PlayerType.HOST;
   gameId = '';
@@ -28,6 +32,9 @@ export class GameStore implements GameStoreType {
   currentBattleIndex = 0;
   heroBattleResult: BattleResultType | null;
   rivalBattleResult: BattleResultType | null;
+  hasRivalRequestedRestart = false;
+  hasHeroRequestedRestart = false;
+  rivalLifesAmount = START_LIFES_AMOUNT;
 
   constructor({ rootStore }: { rootStore: RootStore }) {
     makeObservable(this, {
@@ -40,6 +47,9 @@ export class GameStore implements GameStoreType {
       rivalScore: observable,
       heroBattleResult: observable,
       rivalBattleResult: observable,
+      hasRivalRequestedRestart: observable,
+      hasHeroRequestedRestart: observable,
+      rivalLifesAmount: observable,
       setDifficulty: action,
       setPlayerType: action,
       setScore: action,
@@ -51,7 +61,9 @@ export class GameStore implements GameStoreType {
       endGame: action,
       endBattle: action,
       saveRestartRequest: action,
-      resetGame: action,
+      reduceRivalLifes: action,
+      abortGame: action,
+      giveUp: action,
     });
 
     this.rootStore = rootStore;
@@ -77,20 +89,28 @@ export class GameStore implements GameStoreType {
       0,
       BATTLES_AMOUNT,
     );
-    console.log('this.exercises', this.exercises);
   };
 
   startGame = () => {
-    this.getExercises();
     this.setScore(0, 0);
-    this.isGameStarted = true;
+    this.currentBattleIndex = 0;
+    this.hasRivalRequestedRestart = false;
+    this.hasHeroRequestedRestart = false;
+    this.rivalLifesAmount = this.START_LIFES_AMOUNT;
     this.rootStore.pageStore.changePage('battle');
-    if (this.playerType === PlayerType.HOST) this.startBattle();
+    if (this.playerType === PlayerType.HOST) {
+      this.rootStore.connectionStore.sendMessage({
+        type: MessageType.START_GAME,
+      });
+      this.getExercises();
+      this.startBattle();
+    }
   };
 
   startBattle = (exercise?: ExerciseDataType) => {
     this.rivalBattleResult = null;
     this.heroBattleResult = null;
+    this.isGameStarted = true;
     if (exercise) {
       this.rootStore.battleStore.startBattle(exercise);
     } else {
@@ -105,11 +125,15 @@ export class GameStore implements GameStoreType {
 
   addScores = () => {
     this.heroScore +=
-      (this.heroBattleResult?.lifesLeft ?? 0) * REWARD_FOR_LIFE +
-      (this.heroBattleResult?.secondsLeft ?? 0) * REWARD_FOR_SECOND;
+      this.heroBattleResult?.lifesLeft && this.heroBattleResult?.secondsLeft
+        ? this.heroBattleResult.lifesLeft * REWARD_FOR_LIFE +
+          this.heroBattleResult.secondsLeft * REWARD_FOR_SECOND
+        : 0;
     this.rivalScore +=
-      (this.rivalBattleResult?.lifesLeft ?? 0) * REWARD_FOR_LIFE +
-      (this.rivalBattleResult?.secondsLeft ?? 0) * REWARD_FOR_SECOND;
+      this.rivalBattleResult?.lifesLeft && this.rivalBattleResult?.secondsLeft
+        ? this.rivalBattleResult.lifesLeft * REWARD_FOR_LIFE +
+          this.rivalBattleResult.secondsLeft * REWARD_FOR_SECOND
+        : 0;
   };
 
   saveBattleResult = (result: BattleResultType, isRival = false) => {
@@ -133,7 +157,7 @@ export class GameStore implements GameStoreType {
 
   endBattle = () => {
     this.currentBattleIndex++;
-
+    this.addScores();
     if (
       this.currentBattleIndex >= BATTLES_AMOUNT &&
       this.playerType === PlayerType.HOST
@@ -145,13 +169,43 @@ export class GameStore implements GameStoreType {
     }
   };
 
-  saveRestartRequest = () => {
-    // TODO сохранить согласие противника на перезапуск
+  saveRestartRequest = (isRival = false) => {
+    if (isRival) {
+      this.hasRivalRequestedRestart = true;
+    } else {
+      this.hasHeroRequestedRestart = true;
+      this.rootStore.connectionStore.sendMessage({
+        type: MessageType.REQUEST_RESTART,
+      });
+    }
+    if (
+      this.hasHeroRequestedRestart &&
+      this.hasRivalRequestedRestart &&
+      this.playerType === PlayerType.HOST
+    ) {
+      this.startGame();
+    }
   };
 
-  resetGame = () => {
+  reduceRivalLifes = () => {
+    this.rivalLifesAmount--;
+  };
+
+  abortGame = () => {
     this.rootStore.pageStore.changePage('mainMenu');
     this.rootStore.connectionStore.closeConnection();
     this.gameId = '';
+  };
+
+  giveUp = (isRival = false) => {
+    if (isRival) {
+      this.rivalScore = -1;
+    } else {
+      this.heroScore = -1;
+      this.rootStore.connectionStore.sendMessage({
+        type: MessageType.GIVE_UP,
+      });
+    }
+    this.endGame();
   };
 }

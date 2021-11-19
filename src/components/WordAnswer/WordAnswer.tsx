@@ -6,21 +6,18 @@ export const WordAnswer = observer(
   ({
     letters,
     isCorrectAnswer,
+    losing,
   }: {
     letters: string[];
     isCorrectAnswer: boolean;
+    losing: boolean;
   }) => {
-    const listLetter = [];
-    for (const index in letters) {
-      listLetter.push(
-        <LetterAnswer letter={letters[index]} key={`LetterAnswer_${index}`} />,
-      );
-    }
-
     return (
       <div className="wordAnswer">
-        {listLetter}
-        {!isCorrectAnswer && <InputLetter />}
+        {letters.map((item, index) => (
+          <LetterAnswer letter={item} key={`LetterAnswer_${index}`} />
+        ))}
+        {!isCorrectAnswer && !losing && <InputLetter />}
       </div>
     );
   },
