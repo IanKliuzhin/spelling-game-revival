@@ -7,11 +7,17 @@ import './style.scss';
 export const BattleInfo = observer(() => {
   const { gameStore, connectionStore } = useStore();
   const { isConnected, connectionId } = connectionStore;
-  const { playerType } = gameStore;
+  const { playerType, isGameEnded, hasHeroRequestedRestart } = gameStore;
+
+  const buttonOrCaption = hasHeroRequestedRestart ? (
+    <div className="waiting">Ожидание решения противника</div>
+  ) : (
+    <StartButton type="game" />
+  );
 
   return (
     <div className="battleInfo">
-      {playerType === PlayerType.HOST && (
+      {playerType === PlayerType.HOST && !isConnected && (
         <div className="battleCode">
           Код игры: {connectionId}. Отправь его сопернику для подключения.
         </div>
@@ -24,9 +30,8 @@ export const BattleInfo = observer(() => {
         'Ожидание соперника...'
       )}
       <MainMenuButton />
-      {isConnected && playerType === PlayerType.HOST && (
-        <StartButton type="game" />
-      )}
+      {playerType === PlayerType.HOST && isConnected && buttonOrCaption}
+      {playerType === PlayerType.CLIENT && isGameEnded && buttonOrCaption}
     </div>
   );
 });

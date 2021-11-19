@@ -6,7 +6,7 @@ export const MainMenuButton = () => {
   return (
     <Button
       type={ButtonType.MAIN_MENU}
-      handleClick={() => gameStore.resetGame()}
+      handleClick={() => gameStore.abortGame()}
       text="На главную"
     />
   );
