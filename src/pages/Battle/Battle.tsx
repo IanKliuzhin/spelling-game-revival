@@ -42,6 +42,7 @@ export const Battle = observer(() => {
 
   useEffect(() => {
     setIsCountdownGoing(true);
+    console.log(toJS(exerciseData));
   }, [exerciseData]);
 
   const countdownCallback = () => {
@@ -49,7 +50,6 @@ export const Battle = observer(() => {
     battleStore.setPlayingSound(true);
     battleStore.startTimer();
   };
-  console.log(toJS(exerciseData));
   const styleAnswer = cn('exercise', { correctAnswer: isCorrectAnswer });
 
   // mistake - ошибка буквы

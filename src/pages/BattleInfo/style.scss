@@ -40,4 +40,14 @@
     font-family: IBM Plex Sans;
     font-size: 16px;
   }
+
+  .waiting {
+    position: absolute;
+    left: 414px;
+    bottom: 68px;
+    font-size: 29px;
+    line-height: 112px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
 }
