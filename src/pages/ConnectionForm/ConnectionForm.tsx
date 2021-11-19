@@ -28,7 +28,7 @@ export const ConnectionForm = observer(() => {
         'Подключение...'
       ) : (
         <div className="formWrapper">
-          Веди код игры:
+          Введи код игры:
           <input value={gameId} onChange={(ev) => setGameId(ev.target.value)} />
           <Button
             handleClick={() => handleConnectClick()}
