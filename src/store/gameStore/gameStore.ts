@@ -51,7 +51,7 @@ export class GameStore implements GameStoreType {
       endGame: action,
       endBattle: action,
       saveRestartRequest: action,
-      resetGame: action,
+      abortGame: action,
     });
 
     this.rootStore = rootStore;
@@ -149,7 +149,7 @@ export class GameStore implements GameStoreType {
     // TODO сохранить согласие противника на перезапуск
   };
 
-  resetGame = () => {
+  abortGame = () => {
     this.rootStore.pageStore.changePage('mainMenu');
     this.rootStore.connectionStore.closeConnection();
     this.gameId = '';

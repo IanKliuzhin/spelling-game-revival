@@ -46,7 +46,7 @@ export class ConnectionStore implements ConnectionStoreType {
     this.connectionId = nanoid(5);
     this.connection.oniceconnectionstatechange = () => {
       if (this.connection?.iceConnectionState === 'disconnected') {
-        this.rootStore.gameStore.resetGame();
+        this.rootStore.gameStore.abortGame();
       }
     };
 
@@ -133,7 +133,7 @@ export class ConnectionStore implements ConnectionStoreType {
       this.handleMessage(data);
     };
     this.channel.onclose = () => {
-      this.rootStore.gameStore.resetGame();
+      this.rootStore.gameStore.abortGame();
     };
   };
 

@@ -43,5 +43,5 @@ export type GameStoreType = {
   endGame: () => void;
   endBattle: () => void;
   saveRestartRequest: () => void;
-  resetGame: () => void;
+  abortGame: () => void;
 };
