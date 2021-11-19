@@ -2,7 +2,13 @@ import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { useStore } from 'src/store';
 import { PlayerType } from 'src/store/gameStore';
-import { Countdown, LifeList, StartButton, WordAnswer } from 'src/components';
+import {
+  Countdown,
+  LifeList,
+  Score,
+  StartButton,
+  WordAnswer,
+} from 'src/components';
 import ReactHowler from 'react-howler';
 import cn from 'classnames';
 import './style.scss';
@@ -71,10 +77,7 @@ export const Battle = observer(() => {
               <LifeList count={counterLife} />
             </div>
           </div>
-          <div className="glassesWrapper">
-            <span className="glassesTitle">Очки:</span>
-            <span className="glassesNumber">{heroScore}</span>
-          </div>
+          <Score />
         </div>
         <div className="centerContainer">{`0:${deadline}`}</div>
         <div className="rightContainer characterInfoContainer">
@@ -85,10 +88,7 @@ export const Battle = observer(() => {
               <LifeList count={rivalLifesAmount} />
             </div>
           </div>
-          <div className="glassesWrapper">
-            <span className="glassesNumber">{rivalScore}</span>
-            <span className="glassesTitle">:Очки</span>
-          </div>
+          <Score isRival />
         </div>
       </div>
       {isCountdownGoing ? (

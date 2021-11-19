@@ -7,3 +7,4 @@ export * from './LetterAnswer';
 export * from './WordAnswer';
 export * from './InputLetter';
 export * from './Countdown';
+export * from './Score';
