@@ -30,7 +30,8 @@ export const BattleResult = ({ isRival = false }) => {
           </div>
           <div className="scoreWrapper time">
             <div className="scoreImage">
-              <div className="icon"></div> 0:{result.secondsLeft}
+              <div className="icon"></div> 0:
+              {String(result.secondsLeft).padStart(2, '0')}
             </div>
             * {REWARD_FOR_SECOND} = {scoreForSeconds}
           </div>
