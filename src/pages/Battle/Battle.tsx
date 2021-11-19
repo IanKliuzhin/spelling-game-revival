@@ -26,7 +26,7 @@ export const Battle = observer(() => {
   } = gameStore;
   const listLetter = battleStore.getListLetter();
   const styleImage = {
-    backgroundImage: exerciseData?.imageSrc,
+    backgroundImage: `url(${exerciseData?.imageSrc})`,
   };
   const isBattleEnded = heroBattleResult && rivalBattleResult;
 

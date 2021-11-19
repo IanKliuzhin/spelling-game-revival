@@ -11,7 +11,7 @@ import {
   PlayerType,
 } from './types';
 
-const BATTLES_AMOUNT = 2;
+const BATTLES_AMOUNT = 10;
 const REWARD_FOR_LIFE = 100;
 const REWARD_FOR_SECOND = 100;
 

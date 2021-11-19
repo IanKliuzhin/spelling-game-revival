@@ -66,13 +66,6 @@ export class BattleStore {
     this.counterTimer = 20;
     this.timerId = 0;
     this.deadline = '20';
-
-    // this.exerciseData = {
-    //   word: 'ггепард',
-    //   soundSrc:
-    //     'https://cms-content.uchi.ru/audios/reading/lesson_2_12/2.12._urok_5.3.mp3',
-    //   imageSrc: 'https://mirplaneta.ru/images/6/1214.jpg',
-    // };
   }
 
   startBattle = (exercise: ExerciseDataType) => {
