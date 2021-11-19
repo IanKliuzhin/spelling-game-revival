@@ -24,6 +24,7 @@ export const Battle = observer(() => {
     rivalScore,
     heroBattleResult,
     rivalBattleResult,
+    rivalLifesAmount,
   } = gameStore;
   const listLetter = battleStore.getListLetter();
   const styleImage = {
@@ -81,6 +82,7 @@ export const Battle = observer(() => {
             <div className="avatar"></div>
             <div className="nameContainer">
               <div className="nickname">Соперник</div>
+              <LifeList count={rivalLifesAmount} />
             </div>
           </div>
           <div className="glassesWrapper">

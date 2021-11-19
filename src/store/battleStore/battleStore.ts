@@ -1,5 +1,6 @@
 import { action, makeObservable, observable } from 'mobx';
 import { RootStore } from '..';
+import { MessageType } from '../connectionStore';
 
 export type ExerciseDataType = {
   word: string;
@@ -60,7 +61,7 @@ export class BattleStore {
     });
 
     this.rootStore = rootStore;
-    this.counterLife = 3;
+    this.counterLife = this.rootStore.gameStore.START_LIFES_AMOUNT;
     this.listLetter = [];
     this.isMistake = false;
     this.activeLetter = '';
@@ -82,7 +83,7 @@ export class BattleStore {
   startBattle = (exercise: ExerciseDataType) => {
     this.counterTimer = 20;
     this.listLetter = [];
-    this.counterLife = 3;
+    this.counterLife = this.rootStore.gameStore.START_LIFES_AMOUNT;
     this.timerId = 0;
     this.deadline = '20';
     this.exerciseData = exercise;
@@ -144,6 +145,9 @@ export class BattleStore {
     this.checkMistake(this.checkLetter(letter));
     if (this.isMistake) {
       this.counterLife -= 1;
+      this.rootStore.connectionStore.sendMessage({
+        type: MessageType.REDUCE_LIFES,
+      });
       this.checkCountLife();
       return;
     }
