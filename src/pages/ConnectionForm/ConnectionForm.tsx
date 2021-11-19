@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
-import { MainMenuButton } from 'src/components';
+import { ExitButton } from 'src/components';
 import { useStore } from 'src/store';
 import './style.scss';
 
@@ -38,7 +38,7 @@ export const ConnectionForm = observer(() => {
           <input value="Подключиться" type="submit" className="button" />
         </form>
       )}
-      <MainMenuButton />
+      <ExitButton />
     </div>
   );
 });

@@ -1,4 +1,4 @@
-import { Button, MainMenuButton } from 'src/components';
+import { Button, ExitButton } from 'src/components';
 import { useStore } from 'src/store';
 import { DifficultyType } from 'src/store/gameStore';
 import './style.scss';
@@ -29,7 +29,7 @@ export const DifficultyChoice = () => {
           />
         ))}
       </div>
-      <MainMenuButton />
+      <ExitButton />
     </div>
   );
 };
