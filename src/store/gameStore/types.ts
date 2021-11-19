@@ -24,7 +24,6 @@ export type GameStoreType = {
   playerType: PlayerType;
   gameId: string;
   rootStore: RootStore;
-  isGameStarted: boolean;
   isGameEnded: boolean;
   heroScore: number;
   rivalScore: number;
@@ -32,6 +31,8 @@ export type GameStoreType = {
   currentBattleIndex: number;
   heroBattleResult: BattleResultType | null;
   rivalBattleResult: BattleResultType | null;
+  hasRivalRequestedRestart: boolean;
+  hasHeroRequestedRestart: boolean;
   setDifficulty: (difficulty: DifficultyType) => void;
   setPlayerType: (playerType: PlayerType) => void;
   setScore: (heroScore: number, rivalScore: number) => void;

@@ -11,7 +11,7 @@ import {
   PlayerType,
 } from './types';
 
-const BATTLES_AMOUNT = 2;
+const BATTLES_AMOUNT = 10;
 const REWARD_FOR_LIFE = 100;
 const REWARD_FOR_SECOND = 100;
 
@@ -20,7 +20,6 @@ export class GameStore implements GameStoreType {
   playerType = PlayerType.HOST;
   gameId = '';
   rootStore: RootStore;
-  isGameStarted = false;
   isGameEnded = false;
   heroScore = 0;
   rivalScore = 0;
@@ -28,18 +27,21 @@ export class GameStore implements GameStoreType {
   currentBattleIndex = 0;
   heroBattleResult: BattleResultType | null;
   rivalBattleResult: BattleResultType | null;
+  hasRivalRequestedRestart = false;
+  hasHeroRequestedRestart = false;
 
   constructor({ rootStore }: { rootStore: RootStore }) {
     makeObservable(this, {
       difficulty: observable,
       playerType: observable,
       gameId: observable,
-      isGameStarted: observable,
       isGameEnded: observable,
       heroScore: observable,
       rivalScore: observable,
       heroBattleResult: observable,
       rivalBattleResult: observable,
+      hasRivalRequestedRestart: observable,
+      hasHeroRequestedRestart: observable,
       setDifficulty: action,
       setPlayerType: action,
       setScore: action,
@@ -77,15 +79,21 @@ export class GameStore implements GameStoreType {
       0,
       BATTLES_AMOUNT,
     );
-    console.log('this.exercises', this.exercises);
   };
 
   startGame = () => {
-    this.getExercises();
     this.setScore(0, 0);
-    this.isGameStarted = true;
+    this.currentBattleIndex = 0;
+    this.hasRivalRequestedRestart = false;
+    this.hasHeroRequestedRestart = false;
     this.rootStore.pageStore.changePage('battle');
-    if (this.playerType === PlayerType.HOST) this.startBattle();
+    if (this.playerType === PlayerType.HOST) {
+      this.rootStore.connectionStore.sendMessage({
+        type: MessageType.START_GAME,
+      });
+      this.getExercises();
+      this.startBattle();
+    }
   };
 
   startBattle = (exercise?: ExerciseDataType) => {
@@ -145,8 +153,22 @@ export class GameStore implements GameStoreType {
     }
   };
 
-  saveRestartRequest = () => {
-    // TODO сохранить согласие противника на перезапуск
+  saveRestartRequest = (isRival = false) => {
+    if (isRival) {
+      this.hasRivalRequestedRestart = true;
+    } else {
+      this.hasHeroRequestedRestart = true;
+      this.rootStore.connectionStore.sendMessage({
+        type: MessageType.REQUEST_RESTART,
+      });
+    }
+    if (
+      this.hasHeroRequestedRestart &&
+      this.hasRivalRequestedRestart &&
+      this.playerType === PlayerType.HOST
+    ) {
+      this.startGame();
+    }
   };
 
   abortGame = () => {
