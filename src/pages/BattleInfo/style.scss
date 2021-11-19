@@ -11,18 +11,33 @@
     width: 544px;
     height: 343px;
     border-radius: 32px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &.hero {
       background-color: #4F95FF;
       justify-self: flex-start;
+
+      .cup {
+        right: 0;
+        transform: rotate(
+          45deg);
+      }
     }
 
     &.rival {
       background-color: #B376FF;
+
+      .cup {
+        left: 0;
+      }
     }
   }
 
   .versus {
+    position: relative;
     color: #535E7E;
     font-family: IBM Plex Sans;
     font-style: italic;
@@ -49,5 +64,63 @@
     line-height: 112px;
     letter-spacing: 0.04em;
     white-space: nowrap;
+  }
+
+  .avatarHero {
+    position: absolute;
+    left: 0%;
+    top: -22%;
+    width: 184px;
+    height: 184px;
+    background-image: url('../Battle/img/avatar1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+  }
+  
+  .avatarRival {
+    position: absolute;
+    right: 0;
+    top: -22%;
+    width: 184px;
+    height: 184px;
+    background-image: url('../Battle/img/avatar2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+  }
+
+  .counterResult {
+    display: flex;
+    flex-direction: column;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 64px;
+    line-height: 83px;
+    text-align: center;
+    letter-spacing: 0.04em;
+    color: #fff;
+  }
+
+  .cup {
+    position: absolute;
+    top: -20%;
+    width: 144px;
+    height: 170px;
+    background-image: url('./img/cup.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .deadHeat {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 30%);
+    background-image: url('./img/deadHeat.png');
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 }
