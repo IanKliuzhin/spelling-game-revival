@@ -14,10 +14,15 @@ export const InputLetter = observer(() => {
     mistake: isMistake,
   });
 
-  const handleChangeInput = (event: any) => {
-    const letter = event.target.value;
+  const handleChangeInput = (event: React.FormEvent<HTMLInputElement>) => {
+    const letter = event.currentTarget.value;
     if (letter.length > 1) {
-      event.target.value = letter[0];
+      battleStore.setActiveLetter('');
+    }
+
+    if (letter === '') {
+      battleStore.setActiveLetter('');
+      return;
     }
 
     battleStore.setLetter(letter);

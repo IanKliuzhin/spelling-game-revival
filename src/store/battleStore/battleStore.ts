@@ -159,6 +159,7 @@ export class BattleStore {
   checkCountLife = () => {
     if (this.counterLife === 0) {
       this.losing = true;
+      this.addLetters();
       this.endBattle();
     }
   };
