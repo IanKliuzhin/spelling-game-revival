@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'src/store';
-import { MainMenuButton, StartButton } from 'src/components';
+import { ExitButton, StartButton } from 'src/components';
 import { PlayerType } from 'src/store/gameStore';
 import './style.scss';
 
@@ -29,7 +29,7 @@ export const BattleInfo = observer(() => {
       ) : (
         'Ожидание соперника...'
       )}
-      <MainMenuButton />
+      <ExitButton />
       {playerType === PlayerType.HOST && isConnected && buttonOrCaption}
       {playerType === PlayerType.CLIENT && isGameEnded && buttonOrCaption}
     </div>

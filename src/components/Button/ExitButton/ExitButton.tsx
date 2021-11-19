@@ -1,7 +1,7 @@
 import { Button, ButtonType } from 'src/components';
 import { useStore } from 'src/store';
 
-export const MainMenuButton = () => {
+export const ExitButton = () => {
   const { gameStore } = useStore();
   return (
     <Button
