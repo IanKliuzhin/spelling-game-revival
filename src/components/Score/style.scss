@@ -1,0 +1,44 @@
+
+.scoreWrapper {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 31px;
+  letter-spacing: 0.04em;
+  color: #535E7E;
+  display: flex;
+  align-items: center;
+
+  .starWrapper {
+    display: inline-block;
+    white-space: pre-wrap;
+    width: 96px;
+    order: 1;
+
+    .star {
+      display: inline-block;
+      position: relative;
+      height: 31px;
+      width: 31px;
+      background: url('./img/star.svg') center/contain no-repeat;
+      float: left;
+
+      .rightContainer & {
+        float: right;
+      }
+    }
+  }
+  
+  .scoreNumber {
+    display: inline-block;
+    width: 96px;
+    text-align: right;
+    padding: 0 15px;
+    box-sizing: border-box;
+
+    .rightContainer & {
+      text-align: left;
+      order: 2;
+    }
+  }
+}
