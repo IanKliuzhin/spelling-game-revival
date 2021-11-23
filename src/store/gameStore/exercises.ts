@@ -110,13 +110,13 @@ export const exercises: Exercises = {
       word: 'дельфин',
       soundSrc:
         'https://cms-content.uchi.ru/audios/reading/lesson_1_9/D/1.9_urok_d6.7.mp3',
-      imageSrc: 'https/imagesWords/delfin.jpg',
+      imageSrc: '/imagesWords/delfin.jpg',
     },
     {
       word: 'зебра',
       soundSrc:
         'https://cms-content.uchi.ru/audios/reading/lesson_1_13/1.13_urok_%20YUE2.4.mp3',
-      imageSrc: 'https/imagesWords/zebra.jpg',
+      imageSrc: '/imagesWords/zebra.jpg',
     },
     {
       word: 'фонарик',
