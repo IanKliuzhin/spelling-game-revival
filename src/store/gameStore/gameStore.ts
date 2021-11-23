@@ -111,6 +111,7 @@ export class GameStore implements GameStoreType {
     this.rivalBattleResult = null;
     this.heroBattleResult = null;
     this.isGameStarted = true;
+    this.rivalLifesAmount = this.START_LIFES_AMOUNT;
     if (exercise) {
       this.rootStore.battleStore.startBattle(exercise);
     } else {
