@@ -78,13 +78,13 @@
 
   .leftContainer & {
     background-color: #4F95FF;
-    background-image: url('./img/avatar1.jpg');
+    background-image: url(./img/avatar1.jpg);
     background-repeat: no-repeat;
   }
 
   .rightContainer & {
     background-color: #B376FF;
-    background-image: url('./img/avatar2.jpg');
+    background-image: url(./img/avatar2.jpg);
     background-repeat: no-repeat;
   }
 }
@@ -150,7 +150,7 @@
   left: 10px;
   width: 40px;
   height: 40px;
-  background-image: url('./img/soundIcon.svg');
+  background-image: url(./img/soundIcon.svg);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;

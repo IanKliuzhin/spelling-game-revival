@@ -53,7 +53,7 @@
 
       &.time {
         .icon {
-          background: url('./img/time.svg') center/contain no-repeat;
+          background: url(./img/time.svg) center/contain no-repeat;
         }
       }
 
@@ -64,7 +64,7 @@
         .icon {
           height: 68px;
           width: 68px;
-          background: url('../Score/img/star.svg') center/contain no-repeat;
+          background: url(../Score/img/star.svg) center/contain no-repeat;
         }
       }
   }
