@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/spelling-game-p2p/static/css/main.17f82c64.chunk.css",
-    "main.js": "/spelling-game-p2p/static/js/main.94668be4.chunk.js",
-    "main.js.map": "/spelling-game-p2p/static/js/main.94668be4.chunk.js.map",
+    "main.js": "/spelling-game-p2p/static/js/main.c276e66e.chunk.js",
+    "main.js.map": "/spelling-game-p2p/static/js/main.c276e66e.chunk.js.map",
     "runtime-main.js": "/spelling-game-p2p/static/js/runtime-main.58570c6a.js",
     "runtime-main.js.map": "/spelling-game-p2p/static/js/runtime-main.58570c6a.js.map",
     "static/js/2.5d2d1abd.chunk.js": "/spelling-game-p2p/static/js/2.5d2d1abd.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.58570c6a.js",
     "static/js/2.5d2d1abd.chunk.js",
     "static/css/main.17f82c64.chunk.css",
-    "static/js/main.94668be4.chunk.js"
+    "static/js/main.c276e66e.chunk.js"
   ]
 }
