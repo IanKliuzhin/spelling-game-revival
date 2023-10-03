@@ -20,9 +20,9 @@ export const StartButton = ({ type }: { type: 'game' | 'battle' }) => {
   const getText = () => {
     switch (type) {
       case 'game':
-        return isGameEnded ? 'Новая игра' : 'Начать игру';
+        return isGameEnded ? 'New game' : 'Start';
       case 'battle':
-        return 'Следующее слово';
+        return 'Next word';
       default:
         return '';
     }

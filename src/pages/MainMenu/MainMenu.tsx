@@ -19,13 +19,10 @@ export const MainMenu = () => {
 
   return (
     <div className="mainPage">
-      <div className="titlePage">Словарная битва</div>
+      <div className="titlePage">Spelling game</div>
       <div className="wrapperButton">
-        <Button handleClick={handleCreateGameClick} text="Создать битву" />
-        <Button
-          handleClick={handleConnectClick}
-          text="Присоединиться к битве"
-        />
+        <Button handleClick={handleCreateGameClick} text="Create battle" />
+        <Button handleClick={handleConnectClick} text="Connect to battle" />
       </div>
     </div>
   );

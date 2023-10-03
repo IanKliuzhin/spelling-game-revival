@@ -104,6 +104,9 @@ export class BattleStore {
     if (this.counterTimer === 0) {
       this.limitDeadline();
     }
+    if (this.counterTimer < 0) {
+      this.deadline = '00';
+    }
   };
 
   timer = () => {

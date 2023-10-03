@@ -14,7 +14,6 @@ import {
 import ReactHowler from 'react-howler';
 import cn from 'classnames';
 import './style.scss';
-import { toJS } from 'mobx';
 
 export const Battle = observer(() => {
   const { battleStore, gameStore } = useStore();
@@ -46,7 +45,6 @@ export const Battle = observer(() => {
 
   useEffect(() => {
     setIsCountdownGoing(true);
-    console.log(toJS(exerciseData));
   }, [exerciseData]);
 
   const countdownCallback = () => {
@@ -69,7 +67,7 @@ export const Battle = observer(() => {
           <div className="topLine">
             <div className="avatar"></div>
             <div className="nameContainer">
-              <div className="nickname">Ты</div>
+              <div className="nickname">You</div>
               <LifeList count={counterLife} />
             </div>
           </div>
@@ -80,7 +78,7 @@ export const Battle = observer(() => {
           <div className="topLine">
             <div className="avatar"></div>
             <div className="nameContainer">
-              <div className="nickname">Соперник</div>
+              <div className="nickname">Enemy</div>
               <LifeList count={rivalLifesAmount} />
             </div>
           </div>

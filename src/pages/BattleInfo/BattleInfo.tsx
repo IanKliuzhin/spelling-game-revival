@@ -29,7 +29,7 @@ export const BattleInfo = observer(() => {
   }
 
   const buttonOrCaption = hasHeroRequestedRestart ? (
-    <div className="waiting">Ожидание решения противника</div>
+    <div className="waiting">Waiting for the enemy</div>
   ) : (
     <StartButton type="game" />
   );
@@ -38,14 +38,14 @@ export const BattleInfo = observer(() => {
     <div className="battleInfo">
       {playerType === PlayerType.HOST && !isConnected && (
         <div className="battleCode">
-          Код игры: {connectionId}. Отправь его сопернику для подключения.
+          Game code: {connectionId}. Send it to your friend.
         </div>
       )}
       <div className="fighter hero">
         <div className="avatarHero" />
         {isGameEnded && (
           <div className="counterResult">
-            {heroScore} <span>очков</span>
+            {heroScore} <span>points</span>
           </div>
         )}
         {isGameEnded && heroWin && <div className="cup" />}
@@ -59,13 +59,13 @@ export const BattleInfo = observer(() => {
           <div className="avatarRival" />
           {isGameEnded && (
             <div className="counterResult">
-              {rivalScore} <span>очков</span>
+              {rivalScore} <span>points</span>
             </div>
           )}
           {isGameEnded && rivalWin && <div className="cup" />}
         </div>
       ) : (
-        'Ожидание соперника...'
+        'Waiting for the enemy...'
       )}
       <ExitButton />
       {playerType === PlayerType.HOST && isConnected && buttonOrCaption}

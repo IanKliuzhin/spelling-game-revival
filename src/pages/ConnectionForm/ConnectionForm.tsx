@@ -25,17 +25,17 @@ export const ConnectionForm = observer(() => {
   return (
     <div className="connectionForm">
       {isConnecting ? (
-        'Подключение...'
+        'Connecting...'
       ) : (
         <form className="formWrapper" onSubmit={handleSubmit}>
-          Введи код игры:
+          Enter game code:
           <input
             value={gameId}
             onChange={(ev) => setGameId(ev.target.value)}
-            placeholder="Введите код"
+            placeholder="Enter the code"
             className="input"
           />
-          <input value="Подключиться" type="submit" className="button" />
+          <input value="Connect" type="submit" className="button" />
         </form>
       )}
       <ExitButton />

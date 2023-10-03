@@ -12,14 +12,14 @@ export const DifficultyChoice = () => {
   };
 
   const listButtonName = {
-    [DifficultyType.EASY]: 'Легкий',
-    [DifficultyType.MEDIUM]: 'Средний',
-    [DifficultyType.HARD]: 'Тяжёлый',
+    [DifficultyType.EASY]: 'Easy',
+    [DifficultyType.MEDIUM]: 'Medium',
+    [DifficultyType.HARD]: 'Hard',
   };
 
   return (
     <div className="difficultyPage">
-      <div className="titlePage">Выбор сложности</div>
+      <div className="titlePage">Choose difficulty</div>
       <div className="wrapperButton">
         {Object.values(DifficultyType).map((difficulty) => (
           <Button

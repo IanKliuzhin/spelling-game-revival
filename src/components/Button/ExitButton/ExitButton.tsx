@@ -11,7 +11,7 @@ export const ExitButton = () => {
       handleClick={() =>
         isGameUp ? gameStore.giveUp() : gameStore.abortGame()
       }
-      text={isGameUp ? 'Сдаться' : 'На главную'}
+      text={isGameUp ? 'Give up' : 'Main page'}
     />
   );
 };
