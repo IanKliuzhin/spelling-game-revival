@@ -129,16 +129,11 @@ export class ConnectionStore implements ConnectionStoreType {
     this.channel = channel;
     this.channel.onmessage = (ev) => {
       const data = JSON.parse(ev.data);
-      console.log('got data by channel', data);
       this.handleMessage(data);
     };
     this.channel.onclose = () => {
       this.rootStore.gameStore.abortGame();
     };
-  };
-
-  sendMessage = (message: Message) => {
-    this.channel?.send(JSON.stringify(message));
   };
 
   closeConnection = () => {
@@ -150,6 +145,10 @@ export class ConnectionStore implements ConnectionStoreType {
     this.connection = null;
     this.connectionId = null;
     this.isConnected = false;
+  };
+
+  sendMessage = (message: Message) => {
+    this.channel?.send(JSON.stringify(message));
   };
 
   handleMessage = (message: Message) => {

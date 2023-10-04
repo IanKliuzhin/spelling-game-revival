@@ -3,8 +3,8 @@ import { DifficultyType, Exercises } from './types';
 export const exercises: Exercises = {
   [DifficultyType.EASY]: [
     {
-      word: 'chamomile',
-      soundSrc: 'sounds/chamomile.mp3',
+      word: 'camomile',
+      soundSrc: 'sounds/camomile.mp3',
       imageSrc: 'imagesWords/romashka.jpg',
     },
     {
